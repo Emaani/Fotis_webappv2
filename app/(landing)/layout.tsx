@@ -3,6 +3,8 @@ import Logo from "@/assets/img/logo.png"
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import Link from "next/link";
 import Image from 'next/image'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 const MainLayout = ({
     children,
@@ -10,6 +12,7 @@ const MainLayout = ({
     children: React.ReactNode
 }) => {
     const drawerRef = useRef<DrawerFunctions>(null);
+    const [loggedIn, setLoggedIn] = useState(true)
 
     return (
         <div className=" ">
@@ -21,13 +24,19 @@ const MainLayout = ({
                         </div>
                         <div className="flex-grow flex justify-center">
                             <Link href="/" className="nav-link">home</Link>
-                            <Link href="/" className="nav-link">about</Link>
+                            <Link href="/about" className="nav-link">about</Link>
                             <Link className="nav-link" href="faq">services</Link>
                             <Link href="/contact" className="nav-link">shop</Link>
                             <Link href="/contact" className="nav-link">contact</Link>
                         </div>
                         <div className="flex flex-col justify-end h-auto ">
-                            <a href="https://dashboard.ntuma.app" type="button" className=" text-black bg-prim-orange hover:bg-prim-green focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center cursor-pointer   ">Sign In</a>
+                            {!loggedIn ?
+                                <a href="" type="button" className=" text-black bg-prim-orange hover:bg-prim-green focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center cursor-pointer   ">Sign In</a>
+                                :
+                                <div>
+                                    <MyAccountSection />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -50,7 +59,7 @@ const MainLayout = ({
             <div className=" min-h-screen">
                 {children}
             </div>
-            {/* <Footer /> */}
+            <Footer />
             <Drawer ref={drawerRef} />
         </div>
     )
@@ -60,20 +69,23 @@ export default MainLayout;
 
 export const Footer = () => {
     return (
-        <div className=" bg-body-bg border-t-2  pt-20 pb-7">
+        <div className=" bg-prim-color border-t-2  pt-20 pb-7 text-white">
             <div className="horizontal-padding">
-                {/* <Image width={80} src={Logo2} alt="" /> */}
                 <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 3xl:grid-cols-4 text-sm">
-                    <div className=" pt-14 pb-5 ">
-                        <p className="">0393208406</p>
-                        <p className="mt-3">support@ntuma.app</p>
-                        <p className="mt-3">Ntinda Road, Plot 49 Rovis Apartment, <br /> Suite C8</p>
+                    <div className=" pb-5 ">
+                        <Image width={80} src={Logo} alt="" />
+                        <p className="mt-5">+256 757 220113</p>
+                        <p className="mt-3">fotisenterprises@gmail.com</p>
+                        <p className="mt-3">10 Bukoto St, Kampala, Uganda <br /></p>
                     </div>
-                    <div className=" pb-5">
-                        <p className=" text-prim-green font-bold mb-3">Product</p>
+                    <div className=" pb-5 pt-5">
+                        <p className=" text-prim-green font-bold mb-3">Company</p>
                         <ul className=" gap-3 flex flex-col">
                             <li>
-                                <Link className="hover:text-prim-green" href="/">About</Link>
+                                <Link className="hover:text-prim-green" href="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link className="hover:text-prim-green" href="/about">About</Link>
                             </li>
                             <li>
                                 <Link className="hover:text-prim-green" href="/faq">FAQs</Link>
@@ -82,23 +94,31 @@ export const Footer = () => {
                                 <Link className="hover:text-prim-green" href="/contact">Contact</Link>
                             </li>
                             <li>
-                                <a className="hover:text-prim-green" href="https://dashboard.ntuma.app/signup">Register</a>
+                                <a className="hover:text-prim-green" href="/signup">Register</a>
                             </li>
-
                         </ul>
                     </div>
-                    <div className=" pb-5">
-                        <p className=" text-prim-green font-bold mb-3">Company</p>
+                    <div className=" pb-5 pt-5">
+                        <p className=" text-prim-green font-bold mb-3">Services</p>
                         <ul className=" gap-3 flex flex-col">
                             <li>
-                                <Link className="hover:text-prim-green" href="/terms">Terms of Use</Link>
+                                <Link className="hover:text-prim-green" href="/terms">Agro Products</Link>
                             </li>
                             <li>
-                                <Link className="hover:text-prim-green" href="/privacy-policy">Privacy Policy</Link>
+                                <Link className="hover:text-prim-green" href="/privacy-policy">Transportation</Link>
+                            </li>
+                            <li>
+                                <Link className="hover:text-prim-green" href="/privacy-policy">Warehouses</Link>
+                            </li>
+                            <li>
+                                <Link className="hover:text-prim-green" href="/privacy-policy">Auctions</Link>
+                            </li>
+                            <li>
+                                <Link className="hover:text-prim-green" href="/privacy-policy">Partnership</Link>
                             </li>
                         </ul>
                     </div>
-                    <div className=" pb-5">
+                    <div className=" pb-5 pt-5">
                         <p className=" text-prim-green font-bold mb-3">Community</p>
                         <ul className=" gap-3 flex flex-col">
                             <li>
@@ -127,6 +147,42 @@ export const Footer = () => {
 export type DrawerFunctions = {
     openDrawer: () => void
 }
+
+const MyAccountSection = () => {
+    const [showDropDown, setShowDropDown] = useState(false)
+    const [label,setLabel]= useState("This Month")
+    return (
+        <>
+            <div onClick={()=> setShowDropDown(!showDropDown)} className=" flex  gap-2 cursor-pointer">
+                <div>
+                    <div className="w-5 h-5 bg-prim-orange bg-opacity-90 text-center flex flex-col justify-center rounded-full text-[12px]">
+                        MK
+                    </div>
+                </div>
+                <div className="flex flex-col justify-center flex-grow">
+                    <p className=" text-sm text-white">My account</p>
+                </div>
+                <div className="flex flex-col justify-center text-white">
+                    <span className=" flex flex-col text-[12px] gap-0">
+                        <FontAwesomeIcon icon={faAngleDown} />
+                    </span>
+                </div>
+            </div>
+
+            <div className={!showDropDown ? 'hidden' : '' + 'z-50 right-4 border absolute min-w-[15rem] text-base list-none  bg-gray-50 bg-opacity-100  shadow-2xl py-1 mt-1 overflow-y-auto'} >
+                <ul className="">
+                    <li  className="nav-dropdown-item text-sm"> <span>Profile</span> </li>
+                    <li  className="nav-dropdown-item text-sm"> <span>Order History</span> </li>
+                    <li  className="nav-dropdown-item text-sm"> <span>My Business</span> </li>
+                    <li  className="nav-dropdown-item text-sm"> <span>Settings</span> </li>
+                    <li  className="nav-dropdown-item text-sm"> <span>Logout</span> </li>
+                </ul>
+            </div>
+        </>
+    )
+}
+
+
 export const Drawer = forwardRef<DrawerFunctions>((_, ref) => {
     const [open, setOpen] = useState(false)
     const landingUrl = process.env.REACT_APP_LANDING_URL;
@@ -159,7 +215,7 @@ export const Drawer = forwardRef<DrawerFunctions>((_, ref) => {
                                     <Link href="/faq">FAQs</Link>
                                 </li>
                                 <li className=" text-black opacity-95 py-2 text-sm hover:text-prim-green">
-                                    <a href="https://dashboard.ntuma.app/signup">Register</a>
+                                    <a href="/signup">Register</a>
                                 </li>
 
                             </ul>
