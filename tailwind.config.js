@@ -35,7 +35,7 @@ module.exports = {
         '4': '24px',
         '5': '32px',
         '6': '48px',
-        'edge-space': '5rem',
+        'edge-space': '3rem',
         'edge-space-sm': '2rem',
       },
       colors: {

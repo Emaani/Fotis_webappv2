@@ -1,13 +1,9 @@
 
-import coffeeImage from "@/assets/img/Green-Coffee-Beans.jpg"
-import DairyCowImage from "@/assets/img/Dairy-Cow.jpg"
-import RiceImage from "@/assets/img/Rice-781.jpg"
 
-
-import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
-export default function AgroProducts() {
+import AgroProducts from "./AgroProducts"
+export default function AgroProductsPage() {
     return (
         <>
 
@@ -59,52 +55,7 @@ export default function AgroProducts() {
                                     <SearchInput />
                                 </div>
                             </div>
-                            <div className=" grid grid-cols-3 gap-4">
-                                <div className="shadow-sm py-2 border">
-                                    <div className=" w-full flex justify-center">
-                                        <Image className="h-60 w-auto" src={coffeeImage} alt={""} />
-                                    </div>
-                                    <div className=" py-2 px-2 border-t mt-3">
-                                        <h1 className=" font-medium">Fresh Coffee beans</h1>
-                                        <p className=" text-sm font-semibold text-prim-green">UGX 20,000 Per Kg</p>
-                                        <p className=" text-sm opacity-80 mt-2">Suplier: Fotis Agro Limitted</p>
-                                        <button className="btn-light w-full mt-3 ">Place Order</button>
-                                    </div>
-                                </div>
-                                <div className="shadow-sm py-2 border">
-                                    <div className=" w-full flex justify-center">
-                                        <Image className="h-60 w-auto" src={RiceImage} alt={""} />
-                                    </div>
-                                    <div className=" py-2 px-2 border-t mt-3">
-                                        <h1 className=" font-medium">Steam Rice Broken</h1>
-                                        <p className=" text-sm font-semibold text-prim-green">UGX 20,000 Per Kg</p>
-                                        <p className=" text-sm opacity-80 mt-2">Suplier: Kawogo Agro Suppliers</p>
-                                        <button className="btn-light w-full mt-3 ">Place Order</button>
-                                    </div>
-                                </div>
-                                <div className="shadow-sm py-2 border">
-                                    <div className=" w-full flex justify-center">
-                                        <Image className="h-60 w-auto" src={DairyCowImage} alt={""} />
-                                    </div>
-                                    <div className=" py-2 px-2 border-t mt-3">
-                                        <h1 className=" font-medium">Dairy Cow</h1>
-                                        <p className=" text-sm font-semibold text-prim-green">UGX 800,000 - 1,5000,000 (Approx) </p>
-                                        <p className=" text-sm opacity-80 mt-2">Suplier: Fotis Agro Limitted</p>
-                                        <button className="btn-light w-full mt-3 ">Place Order</button>
-                                    </div>
-                                </div>
-                                <div className="shadow-sm py-2 border">
-                                    <div className=" w-full flex justify-center">
-                                        <Image className="h-60 w-auto" src={RiceImage} alt={""} />
-                                    </div>
-                                    <div className=" py-2 px-2 border-t mt-3">
-                                        <h1 className=" font-medium">Steam Rice Broken</h1>
-                                        <p className=" text-sm font-semibold text-prim-green">UGX 20,000 Per Kg</p>
-                                        <p className=" text-sm opacity-80 mt-2">Suplier: Kawogo Agro Suppliers</p>
-                                        <button className="btn-light w-full mt-3 ">Place Order</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <AgroProducts/>
                         </div>
                     </div>
 

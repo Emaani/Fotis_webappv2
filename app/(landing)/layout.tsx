@@ -20,13 +20,12 @@ const MainLayout = ({
                 <div className="horizontal-padding h-full ">
                     <div className="flex flex-row  ">
                         <div className=" h-full">
-                            <Image width={90} src={Logo} alt="Ntuma Logo" />
+                            <Image width={70} src={Logo} alt="Ntuma Logo" />
                         </div>
                         <div className="flex-grow flex justify-center">
                             <Link href="/" className="nav-link">home</Link>
                             <Link href="/about" className="nav-link">about</Link>
-                            <Link className="nav-link" href="faq">services</Link>
-                            <Link href="/contact" className="nav-link">shop</Link>
+                            <Link href="/contact" className="nav-link">Services</Link>
                             <Link href="/contact" className="nav-link">contact</Link>
                         </div>
                         <div className="flex flex-col justify-end h-auto ">
@@ -169,7 +168,7 @@ const MyAccountSection = () => {
                 </div>
             </div>
 
-            <div className={!showDropDown ? 'hidden' : '' + 'z-50 right-4 border absolute min-w-[15rem] text-base list-none  bg-gray-50 bg-opacity-100  shadow-2xl py-1 mt-1 overflow-y-auto'} >
+            <div className={!showDropDown ? 'hidden' : '' + 'z-50 right-4 border absolute min-w-[15rem] text-base list-none bg-white bg-opacity-100  shadow-2xl py-1 mt-1 overflow-y-auto'} >
                 <ul className="">
                     <li  className="nav-dropdown-item text-sm"> <span>Profile</span> </li>
                     <li  className="nav-dropdown-item text-sm"> <span>Order History</span> </li>
