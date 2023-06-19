@@ -65,7 +65,7 @@ const AgroProducts = () => {
                             </div>
                             <div className="py-2 px-2 mt-2 flex flex-col">
                                 <h1 className="font-medium text-sm">{product.name}</h1>
-                                <p className="text-xs font-medium text-green-900">
+                                <p className="text-xs font-semibold text-prim-green-2">
                                     {product.price}
                                 </p>
                                 <p className="text-sm opacity-80 mt-2">

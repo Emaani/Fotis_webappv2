@@ -43,6 +43,7 @@ module.exports = {
         'prim-color':'#082b3a',
         // 'prim-green':"#4EB969",
         'prim-green':"#93cd35",
+        'prim-green-2':"#6c9e1b",
         'prim-orange':"#ffcd1e"
       },
       width:{

@@ -97,26 +97,7 @@ export const Footer = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className=" pb-5 pt-5">
-                        <p className=" text-prim-green font-bold mb-3">Services</p>
-                        <ul className=" gap-3 flex flex-col">
-                            <li>
-                                <Link className="hover:text-prim-green" href="/terms">Agro Products</Link>
-                            </li>
-                            <li>
-                                <Link className="hover:text-prim-green" href="/privacy-policy">Transportation</Link>
-                            </li>
-                            <li>
-                                <Link className="hover:text-prim-green" href="/privacy-policy">Warehouses</Link>
-                            </li>
-                            <li>
-                                <Link className="hover:text-prim-green" href="/privacy-policy">Auctions</Link>
-                            </li>
-                            <li>
-                                <Link className="hover:text-prim-green" href="/privacy-policy">Partnership</Link>
-                            </li>
-                        </ul>
-                    </div>
+                   
                     <div className=" pb-5 pt-5">
                         <p className=" text-prim-green font-bold mb-3">Community</p>
                         <ul className=" gap-3 flex flex-col">
@@ -172,7 +153,7 @@ const MyAccountSection = () => {
                 <ul className="">
                     <li  className="nav-dropdown-item text-sm"> <span>Profile</span> </li>
                     <li  className="nav-dropdown-item text-sm"> <span>Order History</span> </li>
-                    <li  className="nav-dropdown-item text-sm"> <span>My Business</span> </li>
+                    <Link href="/business">   <li onClick={()=>setShowDropDown(!showDropDown)}  className="nav-dropdown-item text-sm"> <span>My Business</span> </li></Link>
                     <li  className="nav-dropdown-item text-sm"> <span>Settings</span> </li>
                     <li  className="nav-dropdown-item text-sm"> <span>Logout</span> </li>
                 </ul>

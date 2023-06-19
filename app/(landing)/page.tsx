@@ -17,7 +17,7 @@ export default function Home() {
                             <div className=" bg-white">
                                 <div className="flex flex-col">
                                     <ul className="services-list">
-                                        <li className=' text-prim-green font-bold'>  <FontAwesomeIcon width={30} icon={faShop} /> Agro Products</li>
+                                        <li className=' text-prim-green-2 font-semibold'>  <FontAwesomeIcon width={30} icon={faShop} /> Agro Products</li>
                                         <li><FontAwesomeIcon width={30} icon={faTruck} /> Logistics</li>
                                         <li> <FontAwesomeIcon width={30} icon={faWarehouse} />Warehouses</li>
                                         <li>  <FontAwesomeIcon width={30} icon={faHammer} />Auctions</li>
