@@ -1,7 +1,4 @@
-import { faLocation, faPaperPlane, faShop, faTruck, faHammer, faWarehouse, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-
+"use client"
 export default function Business() {
     return (
         <>

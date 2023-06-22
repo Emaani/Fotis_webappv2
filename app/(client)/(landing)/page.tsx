@@ -1,49 +1,23 @@
-import { faLocation, faPaperPlane, faShop, faTruck, faHammer, faWarehouse, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faShop, faTruck, faHammer, faWarehouse, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Image from 'next/image'
-
-import Link from 'next/link'
-import AgroProducts from './agro-products/AgroProducts'
+import AgroProducts from '../agro-products/AgroProducts'
+import LandingSideBar from './LandingSideBar'
 
 export default function Home() {
     return (
         <>
-
-
             <section className='horizontal-padding'>
                 <div className=' '>
                     <div className='mt-10 grid grid-cols-5 gap-4'>
                         <div className=" col-span-1 " >
-                            <div className=" bg-white">
-                                <div className="flex flex-col">
-                                    <ul className="services-list">
-                                        <li className=' text-prim-green-2 font-semibold'>  <FontAwesomeIcon width={30} icon={faShop} /> Agro Products</li>
-                                        <li><FontAwesomeIcon width={30} icon={faTruck} /> Logistics</li>
-                                        <li> <FontAwesomeIcon width={30} icon={faWarehouse} />Warehouses</li>
-                                        <li>  <FontAwesomeIcon width={30} icon={faHammer} />Auctions</li>
-                                    </ul>
-
-                                    <div className='mt-4'>
-                                        <span className=' font- text-sm opacity-80'>Agro Categories</span>
-                                        <ul className="categories-list bg-gray-50 mt-1">
-                                            <li>Coffee</li>
-                                            <li>Tea</li>
-                                            <li>Livestock</li>
-                                            <li>Rice</li>
-                                            <li>Eggs</li>
-                                            <li>Beans</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <LandingSideBar />
                         </div>
                         <div className=" col-span-4  ">
                             <div className="flex mb-4">
                                 <div className=" flex flex-col justify-center flex-grow">
-                                    <span className=' font-semibold uppercase text-sm'>Agro Products</span>
+                                    <span className=''>Agro Products</span>
                                 </div>
-                                <div className="w-1/3">
+                                <div className="w-1/4">
                                     <SearchInput />
                                 </div>
                             </div>
@@ -52,10 +26,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
-
-
-
 
             <section className='horizontal-padding py-32'>
                 <div className=" bg-prim-green shadow-xl border-0 bg-opacity-50 text-white  rounded-lg p-8 md:p-12 mb-8">
@@ -77,9 +47,9 @@ const SearchInput = () => {
     return (
         <>
             <div className=" relative">
-                <input type="text" className="form-input-1" />
-                <span className=" absolute h-full top-0 right-0 flex flex-col justify-center px-2 opacity-80">
-                    <FontAwesomeIcon width={15} icon={faSearch} />
+                <input type="text" className="form-input-1 rounded-none" />
+                <span className=" absolute h-full  top-0 right-0 flex flex-col justify-center px-2 opacity-70">
+                    <FontAwesomeIcon width={13} icon={faSearch} />
                 </span>
             </div>
         </>

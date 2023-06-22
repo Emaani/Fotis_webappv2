@@ -12,25 +12,27 @@ const MainLayout = ({
     children: React.ReactNode
 }) => {
     const drawerRef = useRef<DrawerFunctions>(null);
-    const [loggedIn, setLoggedIn] = useState(true)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     return (
         <div className=" ">
-            <nav className=" bg-prim-color pt-4 pb-4 sm:hidden md:hidden lg:hidden xl:hidden 2xl:block 3xl:block w-full z-50">
+            <nav className=" bg-prim-color border-b pt-4 pb-4 sm:hidden md:hidden lg:hidden xl:hidden 2xl:block 3xl:block w-full z-50">
                 <div className="horizontal-padding h-full ">
                     <div className="flex flex-row  ">
                         <div className=" h-full">
-                            <Image width={70} src={Logo} alt="Ntuma Logo" />
+                            <Image width={75} src={Logo} alt="Fotis Logo" />
                         </div>
-                        <div className="flex-grow flex justify-center">
+                        <div className="flex-grow flex justify-center  ">
                             <Link href="/" className="nav-link">home</Link>
                             <Link href="/about" className="nav-link">about</Link>
                             <Link href="/contact" className="nav-link">Services</Link>
                             <Link href="/contact" className="nav-link">contact</Link>
+                            <Link href="/contact" className="nav-link">signup</Link>
+
                         </div>
                         <div className="flex flex-col justify-end h-auto ">
                             {!loggedIn ?
-                                <a href="" type="button" className=" text-black bg-prim-orange hover:bg-prim-green focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center cursor-pointer   ">Sign In</a>
+                                <Link href="/login" type="button" className=" text-black bg-prim-orange hover:bg-prim-green focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center cursor-pointer   ">Sign In</Link>
                                 :
                                 <div>
                                     <MyAccountSection />
@@ -153,7 +155,7 @@ const MyAccountSection = () => {
                 <ul className="">
                     <li  className="nav-dropdown-item text-sm"> <span>Profile</span> </li>
                     <li  className="nav-dropdown-item text-sm"> <span>Order History</span> </li>
-                    <Link href="/business">   <li onClick={()=>setShowDropDown(!showDropDown)}  className="nav-dropdown-item text-sm"> <span>My Business</span> </li></Link>
+                    <Link href="/business/details">   <li onClick={()=>setShowDropDown(!showDropDown)}  className="nav-dropdown-item text-sm"> <span>My Business</span> </li></Link>
                     <li  className="nav-dropdown-item text-sm"> <span>Settings</span> </li>
                     <li  className="nav-dropdown-item text-sm"> <span>Logout</span> </li>
                 </ul>
