@@ -64,8 +64,8 @@ module.exports = {
       },
       fontFamily: {
         'inter':['Inter','sans-serif'],
-        'ubuntu':['Ubuntu','sans-serif']
-
+        'ubuntu':['Ubuntu','sans-serif'],
+        'circular':['Circular','sans-serif']
       }
     },
   },

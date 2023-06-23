@@ -3,38 +3,38 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Ubuntu';
-  font-weight: 300;
-  font-style: normal;
-  src: url('./assets/fonts/Ubuntu-Light.ttf') format('truetype');
+    font-family: 'Circular';
+    font-weight: 300;
+    font-style: normal;
+    src: url('./assets/fonts/Euclid_Circular_B_Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Ubuntu';
-  font-weight: 400;
-  font-style: normal;
-  src: url('./assets/fonts/Ubuntu-Regular.ttf') format('truetype');
+    font-family: 'Circular';
+    font-weight: 400;
+    font-style: normal;
+    src: url('./assets/fonts/Euclid_Circular_B_Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Ubuntu';
-  font-weight: 500;
-  font-style: normal;
-  src: url('./assets/fonts/Ubuntu-Medium.ttf') format('truetype');
+    font-family: 'Circular';
+    font-weight: 500;
+    font-style: normal;
+    src: url('./assets/fonts/Euclid_Circular_B_Medium.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Ubuntu';
-  font-weight: 600;
-  font-style: normal;
-  src: url('./assets/fonts/Ubuntu-Bold.ttf') format('truetype');
+    font-family: 'Circular';
+    font-weight: 600;
+    font-style: normal;
+    src: url('./assets/fonts/Euclid_Circular_B_SemiBold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Ubuntu';
-  font-weight: 700;
-  font-style: normal;
-  src: url('./assets/fonts/Ubuntu-Bold.ttf') format('truetype');
+    font-family: 'Circular';
+    font-weight: 700;
+    font-style: normal;
+    src: url('./assets/fonts/Euclid_Circular_B_Bold.ttf') format('truetype');
 }
 
 
@@ -69,7 +69,7 @@
 
 @layer base {
     html{
-        @apply font-inter
+        @apply font-circular
     }
     .card{
         @apply border border-gray-100  divide-y divide-gray-100 bg-white rounded-md
