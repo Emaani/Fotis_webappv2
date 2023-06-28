@@ -1,4 +1,4 @@
-import { faHammer, faShop, faTruck, faWarehouse } from "@fortawesome/free-solid-svg-icons"
+import { faHammer, faShop, faShoppingBag, faShoppingBasket, faTruck, faWarehouse } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const LandingSideBar = () => {
@@ -7,7 +7,8 @@ const LandingSideBar = () => {
             <div className=" bg-white">
                 <div className="flex flex-col">
                     <ul className="services-list">
-                        <li className=' text-prim-green-2 font-semibold flex gap-2'>  <FontAwesomeIcon width={17} icon={faShop} /> Agro Products</li>
+                        <li className=' text-prim-green-2 font-semibold flex gap-2'>  <FontAwesomeIcon width={17} icon={faShop} /> Overview</li>
+                        <li className='flex gap-2'>  <FontAwesomeIcon width={17} icon={ faShoppingBag} /> Buy Products</li>
                         <li className="flex gap-2"><FontAwesomeIcon width={17} icon={faTruck} /> Logistics</li>
                         <li className="flex gap-2"> <FontAwesomeIcon width={17} icon={faWarehouse} />Warehouses</li>
                         <li className="flex gap-2">  <FontAwesomeIcon width={17} icon={faHammer} />Auctions</li>
