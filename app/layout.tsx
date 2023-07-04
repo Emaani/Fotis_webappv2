@@ -1,4 +1,6 @@
+import ProviderWrapper from './global/components/ProviderWrapper'
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   title: 'Fotis Agro',
@@ -12,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ProviderWrapper>
+          {children}
+        </ProviderWrapper>
+      </body>
     </html>
   )
 }

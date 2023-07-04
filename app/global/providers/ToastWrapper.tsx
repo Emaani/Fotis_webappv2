@@ -26,8 +26,9 @@ const ToastWrapper =()=>{
       }
     },[showToast])
     return (
-      <>
-      <ToastContainer /></>
+      <div>
+          <ToastContainer />
+      </div>
     );
   }
 

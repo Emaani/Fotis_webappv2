@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import Image from "next/image";
 import DropdownButton from '~/app/global/components/DropdownButton';
 import FilePicker from '~/app/global/components/FilePicker';
-import { testProducts } from '../../agro-products/AgroProducts';
+import { testProducts } from '../../shop/AgroProducts';
 
 
 export default function MyProducts() {

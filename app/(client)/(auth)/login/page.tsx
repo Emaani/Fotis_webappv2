@@ -1,17 +1,45 @@
 "use client"
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import AppButton from "~/app/global/components/AppButton"
 import PasswordInput from "~/app/global/components/PasswordInput";
+import { authenticateUser } from "~/app/global/state/features/auth/authSlice";
+import { showToastMessage } from "~/app/global/state/features/generalSlice";
+import { useAppDispatch, useAppSelector } from "~/app/global/state/hooks";
+import { TypeDispatchResponse } from "~/app/global/utils/appTypes";
+import { APP_STATUS } from "~/app/global/utils/constants";
+import useErrorToast from "~/app/global/utils/errorToast";
 
 export default function LoginPage() {
     const [password, setPassWord] = useState("");
     const [email, setEmail] = useState("");
-    const [isLogingInStatus, setIsLogingInStatus] = useState(false)
+    const isLogingInStatus = useAppSelector(state => state.auth.isLogingInStatus)
+    const router = useRouter();
+    const dispatch = useAppDispatch();
+    const errorToast = useErrorToast()
     const signIn = () => {
 
+        dispatch(authenticateUser({ email: email, password: password }))
+            .then((response: TypeDispatchResponse) => {
+                if (response.error) {
+                    dispatch(showToastMessage({
+                        message: response.payload,
+                        type: "error",
+                        position: toast.POSITION.TOP_RIGHT
+                    }))
+                }
+            });
     }
+
+    useEffect(() => {
+        if (isLogingInStatus === APP_STATUS.SUCCESS) {
+            router.push("/")
+        }
+    }, [isLogingInStatus, router])
+
     return (
         <>
             <div className='flex justify-center pt-20'>
@@ -34,7 +62,7 @@ export default function LoginPage() {
 
 
                         <div className=" mt-4 mb-2">
-                            <AppButton callBackFun={() => signIn()} showLoader={isLogingInStatus} spinnerClass="inline w-3 h-3 mr-2 text-prim-yellow animate-spin fill-black"
+                            <AppButton callBackFun={() => signIn()} showLoader={isLogingInStatus === APP_STATUS.PENDING} spinnerClass="inline w-3 h-3 mr-2 text-prim-yellow animate-spin fill-black"
                                 className="btn-primary w-full" text="Login" />
                         </div>
                         <div className="mt-3 text-right">

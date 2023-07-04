@@ -43,7 +43,7 @@ const authInitialState:AuthInitialStateType ={
 
 export const getUserProfile = createAsyncThunk("auth/getUserProfile", async(_,{getState})=>{
     const auth_token = selectAccessToken(getState() as RootState);
-    const response = await axios.get(BASE_URL+"/api/user",{
+    const response = await axios.get(BASE_URL+"/api/users/profile/",{
         headers: {
             Authorization: 'Bearer '+auth_token,
         }
@@ -55,7 +55,7 @@ export const authenticateUser = createAsyncThunk("auth/authenticateUser", async(
     try {
         const response = await axios({
             method: 'post',
-            url: BASE_URL+"/api/auth/login",
+            url: BASE_URL+"/api/auth/login/",
             data:data
         })
         return response.data.data

@@ -1,10 +1,12 @@
 "use client";
 import Logo from "@/assets/img/logo.png"
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import Link from "next/link";
 import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { useAppDispatch, useAppSelector } from "../global/state/hooks";
+import { getUserProfile, selectAuthentication } from "../global/state/features/auth/authSlice";
 
 const MainLayout = ({
     children,
@@ -12,26 +14,31 @@ const MainLayout = ({
     children: React.ReactNode
 }) => {
     const drawerRef = useRef<DrawerFunctions>(null);
-    const [loggedIn, setLoggedIn] = useState(false)
+    const authenticated = useAppSelector(selectAuthentication)
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getUserProfile());
+    }, []);
 
     return (
         <div className=" ">
-            <nav className=" bg-prim-color border-b pt-4 pb-4 sm:hidden md:hidden lg:hidden xl:hidden 2xl:block 3xl:block w-full z-50">
+            <nav className=" bg-prim-color border-b pt-4 pb-4 sm:hidden md:hidden lg:hidden xl:block 2xl:block 3xl:block w-full z-50">
                 <div className="horizontal-padding h-full ">
                     <div className="flex flex-row  ">
                         <div className=" h-full">
                             <Image width={75} src={Logo} alt="Fotis Logo" />
                         </div>
                         <div className="flex-grow flex justify-center  ">
-                            <Link href="/" className="nav-link">home</Link>
-                            <Link href="/about" className="nav-link">about</Link>
-                            <Link href="/contact" className="nav-link">Services</Link>
-                            <Link href="/contact" className="nav-link">contact</Link>
-                            <Link href="/contact" className="nav-link">signup</Link>
+                            <Link href="/" className="nav-link">prices</Link>
+                            <Link href="/shop" className="nav-link">shop</Link>
+                            <Link href="/contact" className="nav-link">logistics</Link>
+                            <Link href="/contact" className="nav-link">warehouses</Link>
+                            <Link href="/contact" className="nav-link">auctions</Link>
 
                         </div>
                         <div className="flex flex-col justify-end h-auto ">
-                            {!loggedIn ?
+                            {!authenticated ?
                                 <Link href="/login" type="button" className=" text-black bg-prim-orange hover:bg-prim-green focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center cursor-pointer   ">Sign In</Link>
                                 :
                                 <div>
@@ -43,7 +50,7 @@ const MainLayout = ({
                 </div>
             </nav>
             {/* small nav */}
-            <nav className="bg-prim-color sm:block md:block lg:block xl:block 2xl:hidden 3xl:hidden nav-bar fixed w-full z-40">
+            <nav className="bg-prim-color sm:block md:block lg:block xl:hidden 2xl:hidden 3xl:hidden nav-bar w-full z-40">
                 <div className=" flex px-edge-space-sm py-5">
                     <div className=" flex-grow">
                         <Image width={80} src={Logo} alt="" />

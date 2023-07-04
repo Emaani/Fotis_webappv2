@@ -222,7 +222,7 @@
         @apply py-3 px-2 border-b text-sm border-opacity-60 cursor-pointer hover:text-prim-green hover:font-semibold
     }
     .services-list li{
-        @apply  flex gap-2 py-3 text-sm border-opacity-60 cursor-pointer hover:bg-prim-green hover:bg-opacity-20
+        @apply  flex gap-2 py-3 text-sm border-opacity-60 cursor-pointer hover:text-prim-green-2
     }
     .services-list .active{
         @apply font-medium text-prim-green-2

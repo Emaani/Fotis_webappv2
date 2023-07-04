@@ -10,7 +10,7 @@ export default function AgroProductsPage() {
             <section className='horizontal-padding'>
                 <div className=' py-8'>
 
-                    <nav className="flex" aria-label="Breadcrumb">
+                    {/* <nav className="flex" aria-label="Breadcrumb">
                         <ol className="inline-flex items-center space-x-1 md:space-x-3">
                             <li className="inline-flex items-center">
                                 <a href="#" className="inline-flex items-center text-sm font-medium text-gray-700  hover:text-prim-green ">
@@ -25,10 +25,10 @@ export default function AgroProductsPage() {
                                 </div>
                             </li>
                         </ol>
-                    </nav>
+                    </nav> */}
 
-                    <div className='mt-10 grid grid-cols-8 gap-6'>
-                        <div className=" col-span-2 " >
+                    <div className='mt-10 grid grid-cols-9 gap-6'>
+                        {/* <div className=" col-span-2 " >
                             <div className=" min-h-[500px] bg-gray-50 bg-opacity-70">
                                 <div className="  px-3 py-3">
                                     <h1 className=" font-semibold">Categories</h1>
@@ -45,11 +45,12 @@ export default function AgroProductsPage() {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div className=" col-span-6">
+                        </div> */}
+                        <div className=" col-span-9">
                             <div className="flex mb-4">
                                 <div className=" flex flex-col justify-center flex-grow">
-                                    All products
+                                    <span className='text-xl font-semibold'>Agro Products</span>
+
                                 </div>
                                 <div className="w-1/3">
                                     <SearchInput />

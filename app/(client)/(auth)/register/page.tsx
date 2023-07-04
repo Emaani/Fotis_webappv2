@@ -4,17 +4,60 @@ import Link from "next/link";
 import { useState } from "react";
 import AppButton from "~/app/global/components/AppButton"
 import PasswordInput from "~/app/global/components/PasswordInput";
+import { showToastMessage } from "~/app/global/state/features/generalSlice";
+import { useAppDispatch } from "~/app/global/state/hooks";
+import useApiRequest from "~/app/global/utils/apiRequest";
+import useErrorToast from "~/app/global/utils/errorToast";
+import { toast } from "react-toastify";
+import { BASE_URL } from "~/app/global/utils/constants";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [isRegistering, setIsRegistering] = useState(Boolean)
-    const [isLogingInStatus, setIsLogingInStatus] = useState(false)
-    const signUp = () => {
-
+    const [isRegistering, setIsRegistering] = useState(false)
+    const dispatch = useAppDispatch()
+    const apiRequest = useApiRequest()
+    const router = useRouter();
+    const errorToast = useErrorToast()
+    const signUp = async () => {
+        if (firstName === '' || lastName === '' || email === '' || password === '') {
+            dispatch(showToastMessage({
+                message: "All Fields are required",
+                type: "error",
+                position: toast.POSITION.TOP_RIGHT
+            }));
+            return;
+        }
+        setIsRegistering(true)
+        await apiRequest({
+            method: 'post',
+            url: BASE_URL + "/api/auth/register/",
+            headers: {
+            },
+            data: {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password
+            }
+        }).then((response) => {
+            setIsRegistering(false)
+            dispatch(showToastMessage({
+                message: "Account Created ",
+                type: "success",
+                position: toast.POSITION.TOP_RIGHT
+            }));
+            router.push("/register/verify?email=" + email)
+        }).catch((error: AxiosError) => {
+            errorToast(error);
+            setIsRegistering(false)
+        });
     }
+
     return (
         <>
             <div className='flex justify-center pt-20'>

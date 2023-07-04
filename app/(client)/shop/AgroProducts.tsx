@@ -58,7 +58,7 @@ const AgroProducts = () => {
 
     return (
         <>
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-4 gap-5">
                 {testProducts.map((product, index) => (
                     <div key={index} className="py-2 rounded-none shadow-xl card ">
                         <div className="card-body flex flex-col h-full">
