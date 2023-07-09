@@ -29,12 +29,12 @@ const MainLayout = ({
                         <div className=" h-full">
                             <Image width={75} src={Logo} alt="Fotis Logo" />
                         </div>
-                        <div className="flex-grow flex justify-center  ">
-                            <Link href="/" className="nav-link">prices</Link>
-                            <Link href="/shop" className="nav-link">shop</Link>
-                            <Link href="/contact" className="nav-link">logistics</Link>
-                            <Link href="/contact" className="nav-link">warehouses</Link>
-                            <Link href="/contact" className="nav-link">auctions</Link>
+                        <div className="flex-grow flex justify-center uppercase text-xs  ">
+                            <Link href="/" className="top-nav-link">market</Link>
+                            <Link href="/shop" className="top-nav-link">about</Link>
+                            <Link href="/contact" className="top-nav-link">faq</Link>
+                            <Link href="/contact" className="top-nav-link">contact</Link>
+                            {/* <Link href="/contact" className="top-nav-link">get started</Link> */}
 
                         </div>
                         <div className="flex flex-col justify-end h-auto ">

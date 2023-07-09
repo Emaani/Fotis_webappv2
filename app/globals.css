@@ -84,8 +84,50 @@
         @apply font-medium
     }
 
-    .nav-link{
+    .top-nav-link{
         @apply text-white px-5 h-full flex flex-col justify-end hover:text-prim-green
+    }
+
+    .nav-link{
+        @apply text-white text-[15px] border-l-[4px] border-l-prim-color-2 mb-1 py-[12px] opacity-80 inline-block w-full  pr-2  hover:bg-prim-color hover:bg-opacity-30
+    }
+    .nav-icon{
+        @apply w-3 flex flex-col justify-center 
+    }
+    .nav-lik svg{
+        @apply opacity-40 bg-red-300
+    }
+    .nav-link.active{
+        @apply    border-l-[4px]  border-l-white border-opacity-50 bg-prim-color bg-opacity-30
+    }
+    .nav-link.highlight{
+        @apply    border-l-[4px]  border-l-prim-color border-opacity-30 bg-prim-color bg-opacity-30
+    }
+    .nav-link .fa{
+        @apply opacity-80 mr-2 mt-[5px]
+    }
+    .sub-link{
+        @apply text-white opacity-80 text-sm  mb-1 py-[8px]  inline-block w-full  pr-2  hover:bg-prim-color hover:bg-opacity-30
+    }
+    .nav-title {
+        @apply flex-grow flex flex-col justify-center pl-2
+    }
+    .nav-dropdown-item{
+        @apply  px-3 pr-6 py-2 hover:bg-gray-50 cursor-pointer
+    }
+    .chips-outline{
+       @apply rounded-full border text-black hover:bg-purple-800 hover:text-white px-2 py-[4px] text-sm cursor-pointer 
+    }
+
+    .chips-secondary{
+      @apply  rounded-full bg-gray-100  text-gray-700 hover:bg-purple-800 hover:text-white px-4 py-[9px] text-xs cursor-pointer
+    }
+    .chips-secondary-2{
+        @apply  rounded-full bg-gray-100  text-gray-700 hover:bg-gray-200  px-4 py-[9px] text-xs cursor-pointer
+      }
+
+    .chips-secondary.active{
+        @apply bg-purple-800 text-white
     }
 
 
