@@ -98,7 +98,7 @@
         @apply opacity-40 bg-red-300
     }
     .nav-link.active{
-        @apply    border-l-[4px]  border-l-white border-opacity-50 bg-prim-color bg-opacity-30
+        @apply    border-l-[4px]  border-l-prim-green border-opacity-50 bg-prim-color bg-opacity-30
     }
     .nav-link.highlight{
         @apply    border-l-[4px]  border-l-prim-color border-opacity-30 bg-prim-color bg-opacity-30

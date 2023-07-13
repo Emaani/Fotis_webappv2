@@ -51,8 +51,8 @@ const LineChart =({series,categories}:PropsType)=>{
                 }
             },
             colors: [
-                '#ccbeda',
-                '#ccbeda',
+                '#a3d085',
+                '#7b898e',
             ],
             legend: {
                 layout: 'vertical',

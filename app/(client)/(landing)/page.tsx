@@ -1,8 +1,10 @@
+"use client";
 import { faShop, faTruck, faHammer, faWarehouse, faSearch, faCaretUp, faCaretDown, faArrowUp, faArrowDown, faArrowDownShortWide, faArrowUpWideShort, faSortAmountUp, faArrowUpShortWide } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AgroProducts from '../shop/AgroProducts'
 import LandingSideBar from './LandingSideBar'
 import SmallChat from '~/app/global/components/SmallChart'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
     return (
@@ -29,6 +31,8 @@ const SearchInput = () => {
 
 
 const CommoditiesSection = () => {
+    const router = useRouter();
+
     const data = [
         {
             name: "Coffee per kg",
@@ -118,7 +122,7 @@ const CommoditiesSection = () => {
             <div className=' grid grid-cols-4 gap-5'>
                 {
                     data.map((item, key) =>
-                        <div className='card rounded-none shadow-lg' key={key}>
+                        <div onClick={()=> router.push("/market")} className='card rounded-none shadow-lg hover:shadow-2xl cursor-pointer' key={key}>
                             <div className='card-body py-4 px-4'>
                                 <p className=''>{item.name}</p>
                                 <div className={`flex mt-2 gap-1 ${item.percentage>0?'text-green-600':"text-red-600"}`}>
@@ -143,51 +147,7 @@ const CommoditiesSection = () => {
             </div>
 
 
-            {/* <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-2 mb-4">
-                <thead>
-                    <tr>
-                        <th scope="col">Market</th>
-                        <th scope="col">Change</th>
-                        <th scope="col">Trend</th>
-                        <th scope="col">Sell</th>
-                        <th scope="col">Buy</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data.map((item, key) =>
-                            <tr>
-                                <td className=''>{item.name}</td>
-                                <td className=' '>
-                                    <span className={`${item.percentage > 0 ? 'text-prim-green-2 ' : 'text-red-600'} max-w-[60px] flex gap-[4px]`}>
-                                        <span>{item.change}</span>
-                                        <span className='flex'> (<FontAwesomeIcon width={10} icon={item.percentage > 0 ? faCaretUp : faCaretDown} />
-                                            <span className=''>{item.percentage}%</span>)</span>
-                                    </span>
-                                </td>
-                                <td className=' max-w-[60px]'>
-                                    <div className=' max-h-7'>
-                                        <SmallChat containerId={item.name} color={item.color} data={item.data} />
-                                    </div>
-                                </td>
-                                <td className=''>
-                                    <span className='w-full flex'>
-                                        <span className=' bg-prim-color px-2 py-1 text-white'>S</span>
-                                        <span className='bg-gray-100 py-1 flex-grow text-end px-2'>{item.sell}</span>
-                                    </span>
-                                </td>
-                                <td className=''>
-                                    <span className='flex w-full'>
-                                        <span className=' bg-prim-color px-2 py-1 text-white'>B</span>
-                                        <span className='bg-gray-100 py-1 flex-grow text-end px-2'>{item.buy}</span>
-                                    </span>
-                                </td>
-                            </tr>
-                        )
-                    }
-
-                </tbody>
-            </table> */}
+           
         </>
     )
 }

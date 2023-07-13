@@ -32,7 +32,7 @@ const MainLayout = ({
                         <div className="flex-grow flex justify-center uppercase text-xs  ">
                             <Link href="/" className="top-nav-link">market</Link>
                             <Link href="/shop" className="top-nav-link">about</Link>
-                            <Link href="/contact" className="top-nav-link">faq</Link>
+                            <Link href="/home" className="top-nav-link">dashboard</Link>
                             <Link href="/contact" className="top-nav-link">contact</Link>
                             {/* <Link href="/contact" className="top-nav-link">get started</Link> */}
 
