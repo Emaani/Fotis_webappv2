@@ -36,7 +36,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (isLogingInStatus === APP_STATUS.SUCCESS) {
-            router.push("/")
+            router.push("/home")
         }
     }, [isLogingInStatus, router])
 

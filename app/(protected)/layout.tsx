@@ -1,10 +1,11 @@
 "use client";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getUserProfile, selectAuthentication, selectProfileLoadingStatus, unSetSessionExpiry } from "../global/state/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../global/state/hooks";
 import { showToastMessage } from "../global/state/features/generalSlice";
 import { toast } from "react-toastify";
+import AppSpinner from "../global/components/AppSpinner";
 
 const ProtectedLayout = ({
     children,
@@ -32,18 +33,18 @@ const ProtectedLayout = ({
     useEffect(() => {
         dispatch(getUserProfile());
     }, []);
-    return (< >{children} </>)
+    // return (< >{children} </>)
 
-    // if (authenticated === false) {
-    //     router.push("/")
-    //     return
-    // } else {
-    //     if (authenticated === true) {
-    //         return (<MainLayout >{children} </MainLayout>)
-    //     } else {
-    //         return <AppSpinner />
-    //     }
-    // } 
+    if (authenticated === false) {
+        router.push("/login")
+        return
+    } else {
+        if (authenticated === true) {
+            return (< >{children} </>)
+        } else {
+            return <AppSpinner />
+        }
+    }
 }
 export default ProtectedLayout;
 

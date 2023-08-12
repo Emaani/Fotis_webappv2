@@ -39,8 +39,8 @@ export default function RegisterPage() {
             headers: {
             },
             data: {
-                first_name: firstName,
-                last_name: lastName,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password
             }

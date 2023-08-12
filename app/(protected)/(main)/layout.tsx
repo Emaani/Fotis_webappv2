@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import personIcon from "../../assets/img/profile.ea4f1c2e.svg"
 import AppSpinner from "@/global/components/AppSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp, faBarChart, faBriefcase, faBusinessTime, faChartBar, faCreditCard, faDollarSign, faFire, faGun, faInfo, faInfoCircle, faLandmark, faLeaf, faList, faLock, faPieChart, faPlug, faPlus, faRefresh, faShop, faShoppingCart, faTable, faUsers, faVcard, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faFire, faLandmark, faLeaf, faShop, faShoppingCart, faUsers, faWallet } from "@fortawesome/free-solid-svg-icons";
 import LogoSection from "../LogoSection";
 
 const Layout = ({
