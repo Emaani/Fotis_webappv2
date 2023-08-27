@@ -11,8 +11,8 @@ import { getAccessTokenFromStorage } from "~/app/global/utils/appHelpers"
 export type TypeUser={
     id: number,
     email:string,
-    first_name:string,
-    last_name:string,
+    firstName:string,
+    lastName:string,
 }
 type AuthInitialStateType ={
     user?:TypeUser
@@ -76,6 +76,11 @@ const authSlice = createSlice({
    name:"auth",
    initialState:authInitialState,
    reducers:{
+    deleteAuthTokens(state){
+        state.accessToken = "";
+        state.authenticated =false
+        state.isLogingInStatus = APP_STATUS.IDLE
+    },
     sessionExpired(state,actions){
         state.userSessionExpired = true
         console.log("Show Login Dialog")
@@ -119,7 +124,7 @@ const authSlice = createSlice({
 });
 
 export const {
-    sessionExpired,unSetSessionExpiry
+    sessionExpired,unSetSessionExpiry,deleteAuthTokens
 }= authSlice.actions
 export default authSlice.reducer
 
@@ -128,3 +133,5 @@ export const selectAccessToken = (state: RootState) => state.auth.accessToken;
 export const selectAuthentication = (state:RootState)=> state.auth.authenticated
 
 export const selectProfileLoadingStatus = (state:RootState)=> state.auth.profileLoadingStatus
+
+export const selectAuthUser = (state: RootState) => state.auth.user;

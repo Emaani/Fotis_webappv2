@@ -1,5 +1,6 @@
 
 export interface Commodity{
+    id:number,
     name: string
     image: string,
     CommodityPrice:CommodityPrice[]

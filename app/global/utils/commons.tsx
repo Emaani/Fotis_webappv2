@@ -15,6 +15,15 @@ export const validatePassword =(password:string) =>{
     return true;
 }
 
+export const isValueEmpty = (value: string | undefined | null) => {
+    if (value !== null && value !== undefined && value !== "") {
+        return false
+    } else {
+        return true
+    }
+}
+
+
 export const formatDate = (value:string,format:string)=>{
     return moment(value.toString()).format(format);
 }

@@ -2,12 +2,14 @@
 import Link from "next/link";
 import Image from 'next/image'
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import personIcon from "../../assets/img/profile.ea4f1c2e.svg"
 import AppSpinner from "@/global/components/AppSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFire, faLandmark, faLeaf, faShop, faShoppingCart, faUsers, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faFire, faLandmark, faLeaf, faShop, faShoppingBag, faShoppingCart, faUsers, faWallet } from "@fortawesome/free-solid-svg-icons";
 import LogoSection from "../LogoSection";
+import { useAppDispatch, useAppSelector } from "~/app/global/state/hooks";
+import { deleteAuthTokens, selectAuthUser } from "~/app/global/state/features/auth/authSlice";
 
 const Layout = ({
     children,
@@ -56,20 +58,63 @@ const MainLayout = ({
 
 const MyAccountSection = () => {
     const [showDropDown, setShowDropDown] = useState(false)
-  
+    const dispatch = useAppDispatch()
+    const router = useRouter()
+    const user  = useAppSelector(selectAuthUser)
+
+
+    const logoutUser = () => {
+        localStorage.removeItem("accessToken")
+        dispatch(deleteAuthTokens())
+        router.push("/")
+    }
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const handleOutsideClick = (event: any) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowDropDown(false);
+            }
+        };
+
+        document.addEventListener("click", handleOutsideClick);
+
+        // Cleanup the event listener when the component unmounts
+        return () => {
+            document.removeEventListener("click", handleOutsideClick);
+        };
+    }, [])
     return (
-      <>
-        <span onClick={() => setShowDropDown(!showDropDown)} className=" hover:bg-green-600 border border-gray-200 cursor-pointer rounded-md flex justify-center h-8">
-          <Image className="w-5" src={personIcon} alt="" />
-        </span>
-        <div className={!showDropDown ? 'hidden' : '' + 'z-50 right-4 border absolute min-w-[13rem] rounded min-h-[80px] text-base list-none bg-white bg-opacity-100  shadow-2xl py-1 mt-8 overflow-y-auto'} >
-          <ul className="">
-            <li  className="nav-dropdown-item text-sm text-gray-600 font-normal"> <span>Logout</span> </li>
-          </ul>
+        <div ref={dropdownRef}>
+            <div onClick={() => setShowDropDown(!showDropDown)} className="flex gap-[3px] cursor-pointer">
+                <p className=" text-sm capitalize">{user?.firstName} {user?.lastName}</p>
+                <p className="flex flex-col justify-center"><FontAwesomeIcon width={10} icon={faAngleDown} /></p>
+            </div>
+            <div className={!showDropDown ? 'hidden' : '' + 'z-50 right-4 border absolute min-w-[13rem] rounded min-h-[80px] text-base list-none bg-white bg-opacity-100  shadow-2xl py-1 mt-8 overflow-y-auto top-4'} >
+                <ul className="">
+                    <li onClick={() => logoutUser()} className="nav-dropdown-item text-sm text-gray-600 font-normal"> <span>Logout</span> </li>
+                </ul>
+            </div>
         </div>
-      </>
     )
-  }
+}
+
+
+// const MyAccountSection = () => {
+//     const [showDropDown, setShowDropDown] = useState(false)
+  
+//     return (
+//       <>
+//         <span onClick={() => setShowDropDown(!showDropDown)} className=" hover:bg-green-600 border border-gray-200 cursor-pointer rounded-md flex justify-center h-8">
+//           <Image className="w-5" src={personIcon} alt="" />
+//         </span>
+//         <div className={!showDropDown ? 'hidden' : '' + 'z-50 right-4 border absolute min-w-[13rem] rounded min-h-[80px] text-base list-none bg-white bg-opacity-100  shadow-2xl py-1 mt-8 overflow-y-auto'} >
+//           <ul className="">
+//             <li  className="nav-dropdown-item text-sm text-gray-600 font-normal"> <span>Logout</span> </li>
+//           </ul>
+//         </div>
+//       </>
+//     )
+//   }
   
 
 const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
@@ -112,7 +157,7 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
 
 
             <li>
-                <Link className={navLink} href="" >
+                <Link className={`${navLink} ${(isActiveLink(["/inventory"]))}`} href="/inventory" >
                     <span className="flex">
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faLeaf} />
@@ -128,7 +173,18 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faShop} />
                         </span>
-                        <span className={navTitle}>Sell Inventory</span>
+                        <span className={navTitle}>Listed Inventory</span>
+                    </span>
+                </Link>
+            </li>
+
+            <li>
+                <Link className={navLink} href="/" >
+                    <span className="flex">
+                        <span className="nav-icon">
+                            <FontAwesomeIcon icon={ faShoppingBag} />
+                        </span>
+                        <span className={navTitle}>Visit Shop</span>
                     </span>
                 </Link>
             </li>

@@ -31,7 +31,7 @@ export default function Home() {
               <div>
                 <FontAwesomeIcon size={"2x"} width={23} className=" text-gray-700 block h-auto" icon={faLeaf} />
               </div>
-              <span className=" text-sm flex flex-col justify-end pl-2 opacity-90">Agro Products</span>
+              <span className=" text-sm flex flex-col justify-end pl-2 opacity-90">Inventory</span>
             </div>
             <div className="flex flex-col justify-end flex-grow mt-5 ">
               <div className="flex  gap-1">
