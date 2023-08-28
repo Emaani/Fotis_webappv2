@@ -1,9 +1,19 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown, faAngleUp, faSearch } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
-import AgroSuppliers from "./AgroSuppliers";
-export default function Market() {
+import { useEffect, useState } from "react"
+import AgroSuppliers from "../AgroSuppliers";
+import useCommoditiesRequest from "~/app/global/hooks/requests/useCommoditiesRequest";
+import useListedInventoryRequest from "~/app/global/hooks/requests/useListedInventoryRequest";
+import AppSpinner from "~/app/global/components/AppSpinner";
+import Link from "next/link";
+export default function Market({ params: { commodityId } }: { params: { commodityId: string } }) {
+    const { fetchCommodityDetails, isFetching, commodityDetails } = useCommoditiesRequest()
+    const { fetchListedInventoryByCommodityId, listedInventory } = useListedInventoryRequest()
+    useEffect(() => {
+        fetchCommodityDetails(parseInt(commodityId))
+        fetchListedInventoryByCommodityId(parseInt(commodityId))
+    }, [commodityId])
     return (
         <>
 
@@ -14,14 +24,16 @@ export default function Market() {
                             <nav className="flex" aria-label="Breadcrumb">
                                 <ol className="inline-flex items-center space-x-1 md:space-x-3">
                                     <li className="inline-flex items-center">
-                                        <a href="#" className="inline-flex items-center text-sm font-medium text-gray-700  hover:text-prim-green ">
-                                            Market
-                                        </a>
+                                        <Link href="/">
+                                            <span  className="inline-flex items-center text-sm font-medium text-gray-700  hover:text-prim-green ">
+                                                Market
+                                            </span>
+                                        </Link>
                                     </li>
                                     <li aria-current="page">
                                         <div className="flex items-center">
                                             <svg aria-hidden="true" className="w-3 h-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-                                            <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Coffee</span>
+                                            <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">{commodityDetails?.name}</span>
                                         </div>
                                     </li>
                                 </ol>
@@ -31,9 +43,15 @@ export default function Market() {
                             <SearchInput />
                         </div>
                     </div>
-
+                    {
+                        isFetching && <AppSpinner />
+                    }
+                     {
+                       ( !isFetching && listedInventory.length ==0 )&& 
+                       <p className=" text-center text-sm mt-10">No Suppliers Yet!</p>
+                    }
                     <div className=" mt-6">
-                        <AgroSuppliers />
+                        <AgroSuppliers listedInventory={listedInventory} />
                     </div>
 
 

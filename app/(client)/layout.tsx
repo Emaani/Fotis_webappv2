@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../global/state/hooks";
-import { getUserProfile, selectAuthentication } from "../global/state/features/auth/authSlice";
+import { deleteAuthTokens, getUserProfile, selectAuthentication } from "../global/state/features/auth/authSlice";
 
 const MainLayout = ({
     children,
@@ -31,7 +31,7 @@ const MainLayout = ({
                         </div>
                         <div className="flex-grow flex justify-center uppercase text-xs  ">
                             <Link href="/" className="top-nav-link">market</Link>
-                            <Link href="/shop" className="top-nav-link">about</Link>
+                            <Link href="/" className="top-nav-link">about</Link>
                             <Link href="/home" className="top-nav-link">dashboard</Link>
                             <Link href="/contact" className="top-nav-link">contact</Link>
                             {/* <Link href="/contact" className="top-nav-link">get started</Link> */}
@@ -140,6 +140,12 @@ export type DrawerFunctions = {
 const MyAccountSection = () => {
     const [showDropDown, setShowDropDown] = useState(false)
     const [label,setLabel]= useState("This Month")
+    const dispatch = useAppDispatch()
+
+    const logoutUser = () => {
+        localStorage.removeItem("accessToken")
+        dispatch(deleteAuthTokens())
+    }
     return (
         <>
             <div onClick={()=> setShowDropDown(!showDropDown)} className=" flex  gap-2 cursor-pointer">
@@ -164,7 +170,7 @@ const MyAccountSection = () => {
                     <li  className="nav-dropdown-item text-sm"> <span>Order History</span> </li>
                     <Link href="/business/details">   <li onClick={()=>setShowDropDown(!showDropDown)}  className="nav-dropdown-item text-sm"> <span>My Business</span> </li></Link>
                     <li  className="nav-dropdown-item text-sm"> <span>Settings</span> </li>
-                    <li  className="nav-dropdown-item text-sm"> <span>Logout</span> </li>
+                    <li onClick={()=>logoutUser()}  className="nav-dropdown-item text-sm"> <span>Logout</span> </li>
                 </ul>
             </div>
         </>

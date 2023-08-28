@@ -4,55 +4,43 @@ import CoffeeImage3 from "@/assets/img/close-up-coffee-beans-spilled-from-bag.jp
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { ListedInventory } from "~/app/global/types/inventory";
+import { STORAGE_URL } from "~/app/global/utils/constants";
 
-export const testSuppliers = [
-    {
-        imageSrc: coffeeImage,
-        name: "Kasozi Agro Suppliers",
-        price: "UGX 20,000 Per Kg",
-        supplier: "Fotis Agro Limitted"
-    },
-    {
-        imageSrc: CoffeeImage3,
-        name: "Fotis Agro Limitted",
-        price: "UGX 20,000 Per Kg",
-        supplier: "Kawogo Agro Suppliers and Logistics"
-    },
-    {
-        imageSrc: CoffeeImage2,
-        name: "Best Agro Limitted",
-        price: "UGX 1,800,000",
-        supplier: "Fotis Agro Limitted"
-    },
 
-];
-
-const AgroSuppliers = () => {
+const AgroSuppliers = ({ listedInventory }: { listedInventory: ListedInventory[] }) => {
 
     return (
         <>
             <div className="grid grid-cols-3 gap-5">
-                {testSuppliers.map((product, index) => (
+                {listedInventory.map((listed, index) => (
                     <div key={index} className="py-2 rounded-none shadow-lg card hover:shadow-2xl cursor-pointer ">
                         <div className="card-body flex flex-col h-full">
                             <div className="flex-grow">
                                 <div className="w-full flex justify-center">
-                                    <Image className=" h-36 w-auto" src={product.imageSrc} alt="" />
+                                    <img className="h-36 w-auto" src={STORAGE_URL + "/" + listed.Inventory.image} alt="" />
+
                                 </div>
                                 <div className=" px-2 mt-2 flex flex-col">
-                                    <h1 className="font-medium text-lg">{product.name}</h1>
+                                    <h1 className="font-medium text-lg">{listed.Inventory.name}</h1>
                                     <div className="bg-gray-50 p-2 rounded mt-3 flex flex-col gap-2">
                                         <div className="flex  text-sm">
                                             <p className="flex-grow">
-                                                Available stock
+                                                Supplier
                                             </p>
-                                            <p>200 tones</p>
+                                            <p>{listed.User.firstName} {listed.User.lastName}</p>
                                         </div>
                                         <div className="flex  text-sm">
                                             <p className="flex-grow">
-                                                Price
+                                                Total
                                             </p>
-                                            <p>230,000 per tone</p>
+                                            <p>{listed.quantity} {listed.Inventory.units}</p>
+                                        </div>
+                                        <div className="flex  text-sm">
+                                            <p className="flex-grow">
+                                                Unit Price
+                                            </p>
+                                            <p>{listed.unitPrice.toLocaleString()}</p>
                                         </div>
 
                                     </div>
@@ -71,7 +59,7 @@ const AgroSuppliers = () => {
 
                                 </div>
                             </div>
-                          
+
                         </div>
                     </div>
                 ))}

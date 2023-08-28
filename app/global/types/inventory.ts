@@ -11,7 +11,17 @@ export interface Inventory{
     userId:number,
     warehouseId:number,
     User:User
-    Warehouse?:Warehouse
+    Warehouse?:Warehouse,
+    ListedInventory:ListedInventory[]
 }
 
+
+export interface ListedInventory{
+    quantity:number,
+    unitPrice:number,
+    userId:number,
+    inventoryId:number
+    Inventory:Inventory,
+    User: User
+}
 

@@ -2,18 +2,27 @@
 import { faCartShopping, faLeaf, faList, faPizzaSlice, faShop, faShoppingBasket, faWallet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AppSpinner from "~/app/global/components/AppSpinner";
 import LineChart from "~/app/global/components/LineChart";
 import TableDropDown from "~/app/global/components/TableDropDown";
 import useInventoryRequest from "~/app/global/hooks/requests/useInventoryRequest";
+import ListInventoryModal from "./ListInventory";
+import { Inventory } from "~/app/global/types/inventory";
 
 export default function InventoryPage() {
   const { inventory, fetchInventory, isFetching } = useInventoryRequest()
+  const [selectedInventory, setSelectedInventory] = useState<Inventory | null>(null)
+  const [showListInventoryModal, setShowListInventoryModal] = useState(false)
 
   useEffect(() => {
     fetchInventory()
   }, [])
+
+  const listInventoryClicked = (inventory: Inventory) => {
+    setSelectedInventory(inventory)
+    setShowListInventoryModal(true)
+  }
   return (
     <div>
       <div className=" flex justify-end">
@@ -33,6 +42,7 @@ export default function InventoryPage() {
                 <th scope="col">Quantity</th>
                 <th scope="col">Description</th>
                 <th scope="col">Warehouse</th>
+                <th>Listed</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -45,10 +55,16 @@ export default function InventoryPage() {
                     <td className=" max-w-[200px]">{item.description}</td>
                     <td>{item.Warehouse?.name ?? "n/a"}</td>
                     <td>
+                      {item.ListedInventory.length > 0 ?
+                        <span className="badge-success">yes</span>
+                        : <span className="badge-failed">no</span>
+                      }
+                    </td>
+                    <td>
                       <TableDropDown labelClass={"btn-secondary px-1 py-[5px] text-xs font-medium text-gray-600 bg-white border "}
                         items={
                           [
-                            { title: "List Inventory" },
+                            { title: "List Inventory", onClick: () => listInventoryClicked(item) },
                             { title: "Update" },
                             { title: "Delete" }
                           ]
@@ -67,6 +83,13 @@ export default function InventoryPage() {
           {
             isFetching && <AppSpinner />
           }
+
+          <ListInventoryModal isOpen={showListInventoryModal}
+            onClose={() => setShowListInventoryModal(false)}
+            inventoryListed={() => {
+              setShowListInventoryModal(false)
+            }}
+            inventory={selectedInventory} />
         </div>
       </div>
     </div>

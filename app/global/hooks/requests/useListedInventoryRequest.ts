@@ -4,56 +4,17 @@ import { useAppSelector } from "~/app/global/state/hooks";
 import useApiRequest from "~/app/global/utils/apiRequest";
 import { BASE_URL } from "~/app/global/utils/constants";
 import useErrorToast from "~/app/global/utils/errorToast";
-import { Inventory, ListedInventory } from "../../types/inventory";
 import { IFormData } from "../validate/validateFormFields";
+import { ListedInventory } from "../../types/inventory";
 
-const useInventoryRequest = () => {
+const useListedInventoryRequest = () => {
   const [isFetching, setIsFetching] = useState(false);
-  const [savingInventory, setSavingInventory] = useState(false);
-  const [inventory, setInventory] = useState<Inventory[]>([]);
+  const [savingListedInventory, setSavingListedInventory] = useState(false);
   const [listedInventory, setListedInventory] = useState<ListedInventory[]>([]);
 
   const apiRequest = useApiRequest()
   const errorToast = useErrorToast()
   const accessToken = useAppSelector(selectAccessToken);
-
-  const fetchInventory = async () => {
-    setIsFetching(true);
-    await apiRequest({
-      method: 'get',
-      url: BASE_URL + `/api/inventory`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).then((response) => {
-      setInventory(response.data);
-      setIsFetching(false)
-    }).catch((error) => {
-      errorToast(error);
-      setIsFetching(false)
-    });
-  }
-
-  const saveInventoryDetails = async (formData: IFormData) => {
-    setSavingInventory(true);
-    try {
-      const response = await apiRequest({
-        method: 'post',
-        url: BASE_URL + "/api/inventory/create",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        data: formData
-      });
-      setSavingInventory(false);
-      return response;
-    } catch (error) {
-      errorToast(error);
-      setSavingInventory(false);
-      throw error;
-    }
-  };
-
 
   const fetchListedInventory = async () => {
     setIsFetching(true);
@@ -72,16 +33,51 @@ const useInventoryRequest = () => {
     });
   }
 
+  const saveListedInventoryDetails = async (formData: IFormData) => {
+    setSavingListedInventory(true);
+    try {
+      const response = await apiRequest({
+        method: 'post',
+        url: BASE_URL + "/api/inventory/list",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        data: formData
+      });
+      setSavingListedInventory(false);
+      return response;
+    } catch (error) {
+      errorToast(error);
+      setSavingListedInventory(false);
+      throw error;
+    }
+  };
+
+  const fetchListedInventoryByCommodityId = async (commodityId: number) => {
+    setIsFetching(true);
+    await apiRequest({
+      method: 'get',
+      url: BASE_URL + `/api/inventory/listed/commodity/${commodityId}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).then((response) => {
+      setListedInventory(response.data);
+      setIsFetching(false)
+    }).catch((error) => {
+      errorToast(error);
+      setIsFetching(false)
+    });
+  }
 
   return {
-    fetchInventory,
+    fetchListedInventory,
     isFetching,
-    inventory,
-    saveInventoryDetails,
-    savingInventory,
     listedInventory,
-    fetchListedInventory
+    saveListedInventoryDetails,
+    savingListedInventory,
+    fetchListedInventoryByCommodityId
   }
 }
 
-export default useInventoryRequest;
+export default useListedInventoryRequest;

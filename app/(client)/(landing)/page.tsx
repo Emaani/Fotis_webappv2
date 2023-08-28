@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import useCommoditiesRequest from '~/app/global/hooks/requests/useCommoditiesRequest';
 import { useEffect } from 'react';
 import { getLatestPriceInfo } from '~/app/global/utils/helpers/commodities_helper';
+import Link from 'next/link';
 
 export default function Home() {
     return (
@@ -35,7 +36,7 @@ const SearchInput = () => {
 
 const CommoditiesSection = () => {
     const router = useRouter();
-    const { fetchCommodities, isFetching,commodities } = useCommoditiesRequest()
+    const { fetchCommodities, isFetching, commodities } = useCommoditiesRequest()
     useEffect(() => {
         fetchCommodities()
     }, [])
@@ -54,31 +55,33 @@ const CommoditiesSection = () => {
             <div className=' grid grid-cols-4 gap-5'>
                 {
                     commodities.map((item, key) =>
-                        <div onClick={()=> router.push("/market")} className='card rounded-none shadow-lg hover:shadow-2xl cursor-pointer' key={key}>
-                            <div className='card-body py-4 px-4'>
-                                <p className=''>{item.name}</p>
-                                <div className={`flex mt-2 gap-1 ${getLatestPriceInfo(item).percentageChange>0?'text-green-600':"text-red-600"}`}>
-                                    <p className={` text-lg`}>{ getLatestPriceInfo(item).latestPrice.toLocaleString()}</p>
-                                    <p className='flex flex-col justify-center '> 
-                                    {
-                                        getLatestPriceInfo(item).percentageChange>0?
-                                        <FontAwesomeIcon width={10} icon={faArrowUp}/>:
-                                        <FontAwesomeIcon width={10} icon={faArrowDown}/>
-                                    }
-                                    </p>
-                                </div>
-                                <div className={`flex mt-1 gap-1 ${getLatestPriceInfo(item).percentageChange>0?'text-green-600':"text-red-600"}`}>
-                                    <p className='text-xs'>{ getLatestPriceInfo(item).percentageChange.toFixed(1)}%  { getLatestPriceInfo(item).priceChange}</p>
+                        <Link href={`/commodity/${item.id}`}>
+                            <div className='card rounded-none shadow-lg hover:shadow-2xl cursor-pointer' key={key}>
+                                <div className='card-body py-4 px-4'>
+                                    <p className=''>{item.name}</p>
+                                    <div className={`flex mt-2 gap-1 ${getLatestPriceInfo(item).percentageChange > 0 ? 'text-green-600' : "text-red-600"}`}>
+                                        <p className={` text-lg`}>{getLatestPriceInfo(item).latestPrice.toLocaleString()}</p>
+                                        <p className='flex flex-col justify-center '>
+                                            {
+                                                getLatestPriceInfo(item).percentageChange > 0 ?
+                                                    <FontAwesomeIcon width={10} icon={faArrowUp} /> :
+                                                    <FontAwesomeIcon width={10} icon={faArrowDown} />
+                                            }
+                                        </p>
+                                    </div>
+                                    <div className={`flex mt-1 gap-1 ${getLatestPriceInfo(item).percentageChange > 0 ? 'text-green-600' : "text-red-600"}`}>
+                                        <p className='text-xs'>{getLatestPriceInfo(item).percentageChange.toFixed(1)}%  {getLatestPriceInfo(item).priceChange}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     )
                 }
-                
+
             </div>
 
 
-           
+
         </>
     )
 }

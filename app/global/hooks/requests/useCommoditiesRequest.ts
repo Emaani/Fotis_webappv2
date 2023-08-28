@@ -11,6 +11,7 @@ const useCommoditiesRequest = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [savingCommodity, setSavingCommodity] = useState(false);
   const [commodities, setCommodities] = useState<Commodity[]>([]);
+  const [commodityDetails, setCommodityDetails] = useState<Commodity | null>(null);
 
   const apiRequest = useApiRequest()
   const errorToast = useErrorToast()
@@ -53,6 +54,22 @@ const useCommoditiesRequest = () => {
     }
   };
 
+  const fetchCommodityDetails = async (commodityId:number) => {
+    setIsFetching(true);
+    await apiRequest({
+      method: 'get',
+      url: BASE_URL + `/api/commodities/details/${commodityId}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).then((response) => {
+      setCommodityDetails(response.data);
+      setIsFetching(false)
+    }).catch((error) => {
+      errorToast(error);
+      setIsFetching(false)
+    });
+  }
 
   return {
     fetchCommodities,
@@ -60,6 +77,8 @@ const useCommoditiesRequest = () => {
     commodities,
     saveCommodityDetails,
     savingCommodity,
+    fetchCommodityDetails,
+    commodityDetails
   }
 }
 

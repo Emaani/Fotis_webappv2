@@ -168,7 +168,7 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
             </li>
 
             <li>
-                <Link className={navLink} href="" >
+                <Link className={`${navLink} ${(isActiveLink(["/listed-inventory"]))}`}  href="/listed-inventory" >
                     <span className="flex">
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faShop} />
