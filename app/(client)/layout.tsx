@@ -20,7 +20,7 @@ const MainLayout = ({
     useEffect(() => {
         dispatch(getUserProfile());
     }, []);
-
+    
     return (
         <div className=" ">
             <nav className=" bg-prim-color border-b pt-4 pb-4 sm:hidden md:hidden lg:hidden xl:block 2xl:block 3xl:block w-full z-50">
@@ -35,7 +35,6 @@ const MainLayout = ({
                             <Link href="/home" className="top-nav-link">dashboard</Link>
                             <Link href="/contact" className="top-nav-link">contact</Link>
                             {/* <Link href="/contact" className="top-nav-link">get started</Link> */}
-
                         </div>
                         <div className="flex flex-col justify-end h-auto ">
                             {!authenticated ?

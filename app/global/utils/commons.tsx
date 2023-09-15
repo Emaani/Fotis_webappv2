@@ -23,6 +23,12 @@ export const isValueEmpty = (value: string | undefined | null) => {
     }
 }
 
+export const addLeadingZero = (number: number): string => {
+    if (number >= 1 && number <= 9) {
+        return `0${number}`;
+    }
+    return number.toLocaleString();
+}
 
 export const formatDate = (value:string,format:string)=>{
     return moment(value.toString()).format(format);

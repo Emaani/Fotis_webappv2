@@ -13,6 +13,7 @@ export type TypeUser={
     email:string,
     firstName:string,
     lastName:string,
+    userType:"visitor"|"fotis_staff"
 }
 type AuthInitialStateType ={
     user?:TypeUser

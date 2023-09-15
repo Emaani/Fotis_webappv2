@@ -3,13 +3,17 @@ import { faCartShopping, faLeaf, faList, faPizzaSlice, faShop, faShoppingBasket,
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import LineChart from "~/app/global/components/LineChart";
+import useCommodityRequest from "~/app/global/hooks/requests/useCommodityRequest";
 import useReportsRequest from "~/app/global/hooks/requests/useReportsRequest";
 import { addLeadingZero } from "~/app/global/utils/commons";
 
 export default function Home() {
   const { fetchDashboardStats, dashboardStats } = useReportsRequest()
+  const { commodity, fetchCommodity, isFetching } = useCommodityRequest()
+
   useEffect(() => {
     fetchDashboardStats()
+    fetchCommodity()
   }, [])
   return (
     <div>
@@ -20,7 +24,7 @@ export default function Home() {
               <div>
                 <FontAwesomeIcon size={"2x"} width={23} className=" text-gray-700 block h-auto" icon={faWallet} />
               </div>
-              <span className=" text-sm flex flex-col justify-end pl-2 opacity-90">Wallet Balance</span>
+              <span className=" text-sm flex flex-col justify-end pl-2 opacity-90">User Wallets</span>
             </div>
             <div className="flex flex-col justify-end flex-grow mt-5 ">
               <div className="flex ">
@@ -38,12 +42,12 @@ export default function Home() {
               <div>
                 <FontAwesomeIcon size={"2x"} width={23} className=" text-gray-700 block h-auto" icon={faLeaf} />
               </div>
-              <span className=" text-sm flex flex-col justify-end pl-2 opacity-90">Inventory</span>
+              <span className=" text-sm flex flex-col justify-end pl-2 opacity-90">Commodities</span>
             </div>
             <div className="flex flex-col justify-end flex-grow mt-5 ">
               <div className="flex  gap-1">
                 <span className="font-bold text-xl opacity-80">
-                  {dashboardStats ? dashboardStats.userInventory : 0}
+                  {commodity.length}
                 </span>
                 <span className="text-sm font-semibold flex flex-col justify-end pb-[1px] pr-1 opacity-80">items</span>
               </div>
@@ -90,8 +94,8 @@ export default function Home() {
         <div className=" card-body">
           <LineChart
             series={[
-              { name: "Sold", data: [2000, 3000, 5000, 3500, 4000] },
-              { name: "Bought", data: [1000, 1500, 1300, 0, 3000] }
+              { name: "Sales", data: [2000, 3000, 5000, 3500, 4000] },
+              { name: "Purchases", data: [1000, 1500, 1300, 0, 3000] }
 
             ]}
             categories={["Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023"]} />

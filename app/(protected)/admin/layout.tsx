@@ -33,7 +33,7 @@ const MainLayout = ({
 
     useEffect(()=>{
         if (user) {
-            if (user.userType == USER_TYPES.FOTIS_STAFF) {
+            if (user.userType != USER_TYPES.FOTIS_STAFF) {
                 router.push("/")
             }
         }
@@ -52,7 +52,7 @@ const MainLayout = ({
                     <div className={"w-screen sm:min-w-laptop sm:max-w-laptop md:min-w-laptop md:max-w-laptop lg:min-w-laptop lg:max-w-full xl:min-w-full xl:max-w-full  overflow-auto min-h-screen bg-gray-50 " + (isMinimized ? "ml-[5rem]" : "ml-[17rem]")}>
                         <div className="h-[90px] border-b flex  px-edge-space bg-white">
                             <div className=" flex-grow flex flex-col justify-center h-full">
-                                <p className="">Buyer/Seller</p>
+                                <p className="">Admin</p>
                             </div>
                             <div className="flex flex-col justify-center h-full">
                                 <MyAccountSection />
@@ -158,120 +158,27 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
     return (
         <ul className=" ">
             <li>
-                <Link className={navLink + " " + (isActiveLink(["/home"]))} href="/home" >
+                <Link className={navLink + " " + (isActiveLink(["/admin/home"]))} href="/admin/home" >
                     <span className="flex">
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faLandmark} />
                         </span>
-                        <span className={navTitle}>Overview</span>
+                        <span className={navTitle}>Dashboard</span>
                     </span>
                 </Link>
             </li>
 
-
-
             <li>
-                <Link className={`${navLink} ${(isActiveLink(["/inventory"]))}`} href="/inventory" >
+                <Link className={`${navLink} ${(isActiveLink(["/admin/commodities"]))}`} href="/admin/commodities" >
                     <span className="flex">
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faLeaf} />
                         </span>
-                        <span className={navTitle}>My Inventory</span>
+                        <span className={navTitle}>Commodities</span>
                     </span>
                 </Link>
             </li>
 
-            <li>
-                <Link className={`${navLink} ${(isActiveLink(["/listed-inventory"]))}`} href="/listed-inventory" >
-                    <span className="flex">
-                        <span className="nav-icon">
-                            <FontAwesomeIcon icon={faShop} />
-                        </span>
-                        <span className={navTitle}>Listed Inventory</span>
-                    </span>
-                </Link>
-            </li>
-
-            <li>
-                <Link className={navLink} href="/" >
-                    <span className="flex">
-                        <span className="nav-icon">
-                            <FontAwesomeIcon icon={faShoppingBag} />
-                        </span>
-                        <span className={navTitle}>Visit Shop</span>
-                    </span>
-                </Link>
-            </li>
-
-            {/* <li>
-                <Link className={navLink} href="" >
-                    <span className="flex">
-                        <span className="nav-icon">
-                            <FontAwesomeIcon icon={faShoppingCart} />
-                        </span>
-                        <span className={navTitle}>Orders</span>
-                    </span>
-                </Link>
-            </li> */}
-
-
-            <li>
-                <a onClick={() => setShowTransactionsList(!showTransactionsList)}
-                    className={` ${navLink} ${(isActiveLink(["/Purchases", "/Sales"]))} 
-                    ${showTransactionsList && 'active'}`} href="#!">
-                    <span className="flex">
-                        <span className="nav-icon">
-                            <FontAwesomeIcon icon={faExchange} />
-                        </span>
-                        <span className={`${navTitle} flex-grow`}>Transactions</span>
-                        <span>
-                            {
-                                showTransactionsList ?
-                                    <FontAwesomeIcon icon={faMinus} /> :
-                                    <FontAwesomeIcon icon={faPlus} />
-                            }
-                        </span>
-                    </span>
-                </a>
-
-                {showTransactionsList &&
-                    <ul className="sub-nav">
-                        <Link href={"/sales"}>
-                            <li className={` ${(isActiveLink(["/users"]))}`}>
-                                Sales
-                            </li>
-                        </Link>
-                        <Link href={"/purchases"}>
-                            <li className={` ${(isActiveLink(["/permissions"]))}`}>
-                                Purchases
-                            </li>
-                        </Link>
-                    </ul>
-                }
-            </li>
-
-            {/* <li>
-                <Link className={navLink} href="" >
-                    <span className="flex">
-                        <span className="nav-icon">
-                            <FontAwesomeIcon icon={faWallet} />
-                        </span>
-                        <span className={navTitle}>Wallet</span>
-                    </span>
-                </Link>
-            </li> */}
-
-
-            <li>
-                <Link className={navLink + " " + (isActiveLink(["/users"]))} href="users" >
-                    <span className="flex">
-                        <span className="nav-icon">
-                            <FontAwesomeIcon icon={faUsers} />
-                        </span>
-                        <span className={navTitle}>Account Settings</span>
-                    </span>
-                </Link>
-            </li>
         </ul>
     );
 }

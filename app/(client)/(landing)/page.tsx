@@ -70,7 +70,7 @@ const CommoditiesSection = () => {
                                         </p>
                                     </div>
                                     <div className={`flex mt-1 gap-1 ${getLatestPriceInfo(item).percentageChange > 0 ? 'text-green-600' : "text-red-600"}`}>
-                                        <p className='text-xs'>{getLatestPriceInfo(item).percentageChange.toFixed(1)}%  {getLatestPriceInfo(item).priceChange}</p>
+                                        <p className='text-xs'>{getLatestPriceInfo(item).percentageChange.toFixed(1)}%  {getLatestPriceInfo(item).priceChange.toLocaleString()}</p>
                                     </div>
                                 </div>
                             </div>

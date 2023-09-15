@@ -6,17 +6,19 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AppButton from "~/app/global/components/AppButton"
 import PasswordInput from "~/app/global/components/PasswordInput";
-import { authenticateUser } from "~/app/global/state/features/auth/authSlice";
+import { authenticateUser, selectAuthUser } from "~/app/global/state/features/auth/authSlice";
 import { showToastMessage } from "~/app/global/state/features/generalSlice";
 import { useAppDispatch, useAppSelector } from "~/app/global/state/hooks";
 import { TypeDispatchResponse } from "~/app/global/utils/appTypes";
-import { APP_STATUS } from "~/app/global/utils/constants";
+import { APP_STATUS, USER_TYPES } from "~/app/global/utils/constants";
 import useErrorToast from "~/app/global/utils/errorToast";
 
 export default function LoginPage() {
     const [password, setPassWord] = useState("");
     const [email, setEmail] = useState("");
     const isLogingInStatus = useAppSelector(state => state.auth.isLogingInStatus)
+    const user = useAppSelector(selectAuthUser)
+
     const router = useRouter();
     const dispatch = useAppDispatch();
     const errorToast = useErrorToast()
@@ -36,7 +38,11 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (isLogingInStatus === APP_STATUS.SUCCESS) {
-            router.push("/home")
+            if (user?.userType == USER_TYPES.FOTIS_STAFF) {
+                router.push("/admin/home")
+            }else{
+                router.push("/home")
+            }
         }
     }, [isLogingInStatus, router])
 

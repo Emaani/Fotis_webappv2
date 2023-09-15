@@ -115,6 +115,13 @@
     .nav-dropdown-item{
         @apply  px-3 pr-6 py-2 hover:bg-gray-50 cursor-pointer
     }
+    .sub-nav li{
+        @apply text-white text-[14px]  mb-1 py-[8px] opacity-80 inline-block w-full  pr-2  hover:bg-prim-color hover:bg-opacity-10 pl-14
+    }
+    .sub-nav li.active{
+        @apply    border-l-[4px]  border-l-white opacity-100 font-medium border-opacity-80
+    }
+
     .chips-outline{
        @apply rounded-full border text-black hover:bg-purple-800 hover:text-white px-2 py-[4px] text-sm cursor-pointer 
     }

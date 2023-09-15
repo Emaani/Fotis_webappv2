@@ -7,19 +7,16 @@ import useErrorToast from "~/app/global/utils/errorToast";
 import { Commodity } from "../../types/commodity";
 import { IFormData } from "../validate/validateFormFields";
 
-const useCommoditiesRequest = () => {
+const useCommodityRequest = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [savingCommodity, setSavingCommodity] = useState(false);
-  const [savingPrice, setSavingPrice] = useState(false);
-
-  const [commodities, setCommodities] = useState<Commodity[]>([]);
-  const [commodityDetails, setCommodityDetails] = useState<Commodity | null>(null);
+  const [commodity, setCommodity] = useState<Commodity[]>([]);
 
   const apiRequest = useApiRequest()
   const errorToast = useErrorToast()
   const accessToken = useAppSelector(selectAccessToken);
 
-  const fetchCommodities = async () => {
+  const fetchCommodity = async () => {
     setIsFetching(true);
     await apiRequest({
       method: 'get',
@@ -28,7 +25,7 @@ const useCommoditiesRequest = () => {
         Authorization: `Bearer ${accessToken}`,
       },
     }).then((response) => {
-      setCommodities(response.data);
+      setCommodity(response.data);
       setIsFetching(false)
     }).catch((error) => {
       errorToast(error);
@@ -41,7 +38,7 @@ const useCommoditiesRequest = () => {
     try {
       const response = await apiRequest({
         method: 'post',
-        url: BASE_URL + "/api/commodities/create",
+        url: BASE_URL + "/api/commodity/create",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -55,55 +52,14 @@ const useCommoditiesRequest = () => {
       throw error;
     }
   };
-
-  const saveCommodityPrice = async (formData: IFormData) => {
-    setSavingPrice(true);
-    try {
-      const response = await apiRequest({
-        method: 'post',
-        url: BASE_URL + "/api/commodities/create-price",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        data: formData
-      });
-      setSavingPrice(false);
-      return response;
-    } catch (error) {
-      errorToast(error);
-      setSavingPrice(false);
-      throw error;
-    }
-  };
-
-  const fetchCommodityDetails = async (commodityId:number) => {
-    setIsFetching(true);
-    await apiRequest({
-      method: 'get',
-      url: BASE_URL + `/api/commodities/details/${commodityId}`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).then((response) => {
-      setCommodityDetails(response.data);
-      setIsFetching(false)
-    }).catch((error) => {
-      errorToast(error);
-      setIsFetching(false)
-    });
-  }
 
   return {
-    fetchCommodities,
+    fetchCommodity,
     isFetching,
-    commodities,
+    commodity,
     saveCommodityDetails,
     savingCommodity,
-    fetchCommodityDetails,
-    commodityDetails,
-    saveCommodityPrice,
-    savingPrice
   }
 }
 
-export default useCommoditiesRequest;
+export default useCommodityRequest;

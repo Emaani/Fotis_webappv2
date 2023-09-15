@@ -33,17 +33,22 @@ const ProtectedLayout = ({
     useEffect(() => {
         dispatch(getUserProfile());
     }, []);
-    // return (< >{children} </>)
 
-    if (authenticated === false) {
-        router.push("/login")
-        return
-    } else {
-        if (authenticated === true) {
-            return (< >{children} </>)
-        } else {
-            return <AppSpinner />
+
+    useEffect(() => {
+        if (authenticated === false) {
+            router.push("/login");
         }
+    }, [authenticated]);
+
+    if (authenticated === true) {
+        return (
+            <>
+                {children}
+            </>
+        );
+    } else {
+        return <AppSpinner />;
     }
 }
 export default ProtectedLayout;
