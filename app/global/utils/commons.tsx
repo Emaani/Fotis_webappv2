@@ -23,6 +23,11 @@ export const isValueEmpty = (value: string | undefined | null) => {
     }
 }
 
+export const cleanAmount = (amount: string) => {
+    return parseFloat(amount.replace(/,/g, ''))
+}
+
+
 export const addLeadingZero = (number: number): string => {
     if (number >= 1 && number <= 9) {
         return `0${number}`;

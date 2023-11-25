@@ -1,25 +1,20 @@
-import coffeeImage from "@/assets/img/Green-Coffee-Beans.jpg";
-import CoffeeImage2 from "@/assets/img/Coffee-764.jpg";
-import CoffeeImage3 from "@/assets/img/close-up-coffee-beans-spilled-from-bag.jpg";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { ListedInventory } from "~/app/global/types/inventory";
 import { STORAGE_URL } from "~/app/global/utils/constants";
 
 
-const AgroSuppliers = ({ listedInventory }: { listedInventory: ListedInventory[] }) => {
+const AgroSuppliers = ({ listedInventory, onClick }: { listedInventory: ListedInventory[], onClick: (item: ListedInventory) => void }) => {
 
     return (
         <>
-            <div className="grid grid-cols-3 gap-5">
-                {listedInventory.map((listed, index) => (
-                    <div key={index} className="py-2 rounded-none shadow-lg card hover:shadow-2xl cursor-pointer ">
+            <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5">
+                {listedInventory.filter((item)=> item.quantity >0).map((listed, index) => (
+                    <div onClick={() => onClick(listed)} key={index} className="py-2 rounded-none shadow-lg card hover:shadow-2xl cursor-pointer ">
                         <div className="card-body flex flex-col h-full">
                             <div className="flex-grow">
                                 <div className="w-full flex justify-center">
                                     <img className="h-36 w-auto" src={STORAGE_URL + "/" + listed.Inventory.image} alt="" />
-
                                 </div>
                                 <div className=" px-2 mt-2 flex flex-col">
                                     <h1 className="font-medium text-lg">{listed.Inventory.name}</h1>
@@ -32,7 +27,7 @@ const AgroSuppliers = ({ listedInventory }: { listedInventory: ListedInventory[]
                                         </div>
                                         <div className="flex  text-sm">
                                             <p className="flex-grow">
-                                                Total
+                                                Available Qty
                                             </p>
                                             <p>{listed.quantity} {listed.Inventory.units}</p>
                                         </div>
@@ -40,7 +35,7 @@ const AgroSuppliers = ({ listedInventory }: { listedInventory: ListedInventory[]
                                             <p className="flex-grow">
                                                 Unit Price
                                             </p>
-                                            <p>{listed.unitPrice.toLocaleString()}</p>
+                                            <p>UGX {listed.unitPrice.toLocaleString()}</p>
                                         </div>
 
                                     </div>

@@ -4,10 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import LineChart from "~/app/global/components/LineChart";
 import useReportsRequest from "~/app/global/hooks/requests/useReportsRequest";
+import { selectAuthUser } from "~/app/global/state/features/auth/authSlice";
+import { useAppSelector } from "~/app/global/state/hooks";
 import { addLeadingZero } from "~/app/global/utils/commons";
 
 export default function Home() {
   const { fetchDashboardStats, dashboardStats } = useReportsRequest()
+  // UserWallet
+  const user = useAppSelector(selectAuthUser)
+  console.log(user?.UserWallet)
+
   useEffect(() => {
     fetchDashboardStats()
   }, [])
@@ -26,7 +32,11 @@ export default function Home() {
               <div className="flex ">
                 <span className="text-sm font-semibold flex flex-col justify-end pb-[1px] pr-1 opacity-80">UGX</span>
                 <span className="font-bold text-xl opacity-80">
-                  0.0
+
+                  {
+                    (user && user?.UserWallet.length > 0) ?
+                      user?.UserWallet[0].walletBalance.toLocaleString() : 0.0
+                  }
                 </span>
               </div>
             </div>
@@ -61,7 +71,7 @@ export default function Home() {
             <div className="flex flex-col justify-end flex-grow mt-5 ">
               <div className="flex  gap-1">
                 <span className="font-bold text-xl opacity-80">
-                  {dashboardStats ? dashboardStats.listedInventory: 0}
+                  {dashboardStats ? dashboardStats.listedInventory : 0}
                 </span>
                 <span className="text-sm font-semibold flex flex-col justify-end pb-[1px] pr-1 opacity-80">items</span>
               </div>

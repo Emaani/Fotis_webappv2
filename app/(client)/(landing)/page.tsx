@@ -48,11 +48,11 @@ const CommoditiesSection = () => {
                     <span className='text-xl font-semibold'>Commodity Prices</span>
                 </div>
                 <div className="w-1/4">
-                    <SearchInput />
+                    {/* <SearchInput /> */}
                 </div>
             </div>
 
-            <div className=' grid grid-cols-4 gap-5'>
+            <div className=' grid grid-cols-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5'>
                 {
                     commodities.map((item, key) =>
                         <Link href={`/commodity/${item.id}`}>

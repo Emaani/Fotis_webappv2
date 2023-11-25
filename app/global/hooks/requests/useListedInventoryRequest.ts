@@ -10,6 +10,8 @@ import { ListedInventory } from "../../types/inventory";
 const useListedInventoryRequest = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [savingListedInventory, setSavingListedInventory] = useState(false);
+  const [isPurchasing, setIsPurchasing] = useState(false);
+
   const [listedInventory, setListedInventory] = useState<ListedInventory[]>([]);
 
   const apiRequest = useApiRequest()
@@ -70,13 +72,36 @@ const useListedInventoryRequest = () => {
     });
   }
 
+
+  const purchaseInvetory = async (formData: IFormData) => {
+    setIsPurchasing(true);
+    try {
+      const response = await apiRequest({
+        method: 'post',
+        url: BASE_URL + "/api/inventory/purchase",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        data: formData
+      });
+      setIsPurchasing(false);
+      return response;
+    } catch (error) {
+      errorToast(error);
+      setIsPurchasing(false);
+      throw error;
+    }
+  };
+
   return {
     fetchListedInventory,
     isFetching,
     listedInventory,
     saveListedInventoryDetails,
     savingListedInventory,
-    fetchListedInventoryByCommodityId
+    fetchListedInventoryByCommodityId,
+    purchaseInvetory,
+    isPurchasing
   }
 }
 

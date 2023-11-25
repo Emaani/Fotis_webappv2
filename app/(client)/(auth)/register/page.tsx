@@ -60,7 +60,7 @@ export default function RegisterPage() {
 
     return (
         <>
-            <div className='flex justify-center pt-20'>
+            <div className='flex justify-center pt-20 horizontal-padding'>
                 <div className=' sm:w-full md:w-full lg:w-2/3 xl:w-1/2 2xl:w-1/2 3xl:w-1/2 '>
                     <div className="px-5 sm:px-0 md:px-0 lg:px-0">
                         <h1 className=' text-2xl font-bold text-gray-800'>Create your  account</h1>

@@ -17,6 +17,7 @@ export interface Inventory{
 
 
 export interface ListedInventory{
+    id:number,
     quantity:number,
     unitPrice:number,
     userId:number,

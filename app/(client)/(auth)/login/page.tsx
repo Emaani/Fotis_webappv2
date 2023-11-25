@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AppButton from "~/app/global/components/AppButton"
@@ -18,6 +18,8 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const isLogingInStatus = useAppSelector(state => state.auth.isLogingInStatus)
     const user = useAppSelector(selectAuthUser)
+    const searchParams = useSearchParams()
+    const from = searchParams.get('from')
 
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -41,14 +43,18 @@ export default function LoginPage() {
             if (user?.userType == USER_TYPES.FOTIS_STAFF) {
                 router.push("/admin/home")
             }else{
-                router.push("/home")
+                if (from) {
+                    router.push(from)
+                } else {
+                    router.push("/home")
+                }
             }
         }
     }, [isLogingInStatus, router])
 
     return (
         <>
-            <div className='flex justify-center pt-20'>
+            <div className='flex justify-center pt-20 horizontal-padding'>
                 <div className=' sm:w-full md:w-full lg:w-2/3 xl:w-1/2 2xl:w-1/2 3xl:w-1/2 '>
                     <div className="px-5 sm:px-0 md:px-0 lg:px-0">
                         <h1 className=' text-2xl font-bold text-gray-800'>Welcome back</h1>

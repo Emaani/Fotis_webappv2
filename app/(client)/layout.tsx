@@ -165,10 +165,10 @@ const MyAccountSection = () => {
 
             <div className={!showDropDown ? 'hidden' : '' + 'z-50 right-4 border absolute min-w-[15rem] text-base list-none bg-white bg-opacity-100  shadow-2xl py-1 mt-1 overflow-y-auto'} >
                 <ul className="">
-                    <li  className="nav-dropdown-item text-sm"> <span>Profile</span> </li>
-                    <li  className="nav-dropdown-item text-sm"> <span>Order History</span> </li>
-                    <Link href="/business/details">   <li onClick={()=>setShowDropDown(!showDropDown)}  className="nav-dropdown-item text-sm"> <span>My Business</span> </li></Link>
-                    <li  className="nav-dropdown-item text-sm"> <span>Settings</span> </li>
+                    <Link href="/home"><li  className="nav-dropdown-item text-sm"> <span>Dashboard</span> </li></Link>
+                    {/* <li  className="nav-dropdown-item text-sm"> <span>Order History</span> </li> */}
+                    {/* <Link href="/business/details">   <li onClick={()=>setShowDropDown(!showDropDown)}  className="nav-dropdown-item text-sm"> <span>My Business</span> </li></Link> */}
+                    {/* <li  className="nav-dropdown-item text-sm"> <span>Settings</span> </li> */}
                     <li onClick={()=>logoutUser()}  className="nav-dropdown-item text-sm"> <span>Logout</span> </li>
                 </ul>
             </div>
