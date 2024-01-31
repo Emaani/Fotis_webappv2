@@ -55,7 +55,7 @@ const CommoditiesSection = () => {
             <div className=' grid grid-cols-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5'>
                 {
                     commodities.map((item, key) =>
-                        <Link href={`/commodity/${item.id}`}>
+                        <Link key={key} href={`/commodity/${item.id}`}>
                             <div className='card rounded-none shadow-lg hover:shadow-2xl cursor-pointer' key={key}>
                                 <div className='card-body py-4 px-4'>
                                     <p className=''>{item.name}</p>

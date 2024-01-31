@@ -150,4 +150,5 @@ const DropFile = forwardRef<DropFileFunctions, DropFileProps>(
     }
 
 )
+DropFile.displayName ="DropFile"
 export default DropFile

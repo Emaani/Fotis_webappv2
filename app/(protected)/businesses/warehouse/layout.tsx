@@ -125,7 +125,7 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faList} />
                         </span>
-                        <span className={navTitle}>Customer's Inventory</span>
+                        <span className={navTitle}>Customer&apos;s Inventory</span>
                     </span>
                 </Link>
             </li>

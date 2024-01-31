@@ -223,3 +223,5 @@ export const Drawer = forwardRef<DrawerFunctions>((_, ref) => {
 
     );
 })
+Drawer.displayName ="Drawer"
+MainLayout.displayName = 'MainLayout';
