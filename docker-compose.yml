@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  fortis-frontend-main:
+    build: .
+    ports:
+       - "8001:80"
