@@ -1,7 +1,6 @@
 "use client";
 
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -9,20 +8,26 @@ import useCommoditiesRequest from '~/app/global/hooks/requests/useCommoditiesReq
 import { useLiveStockRequest } from '~/app/global/hooks/requests/useLiveStockRequest';
 import { getLatestPriceInfo } from '~/app/global/utils/helpers/commodities_helper'; // Importing the helper function
 import Sidebar from '~/app/global/Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
     return (
-        <>
-            <section className='horizontal-padding flex'>
-                <div className="flex-grow">
-                    <CommoditiesSection />
-                    <LiveStockSection />
-                </div>
-                <Sidebar />
-            </section>
-        </>
-    );
-}
+            <div className="flex flex-col min-h-screen">
+                <header className="bg-dark-blue text-white p-4">
+                </header>
+                <main className="flex-grow container mx-auto px-4 py-8 flex">
+                    <div className="w-3/4 pr-6">
+                        <CommoditiesSection />
+                        <LiveStockSection />
+                    </div>
+                    <div className="w-1/5">
+                        <Sidebar />
+                    </div>
+                </main>
+            </div>
+        );
+    }
 
 const CommoditiesSection = () => {
     const router = useRouter();

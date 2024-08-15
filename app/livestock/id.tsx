@@ -3,7 +3,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { LiveStockItem } from '~/app/global/types/livestock';
-import useLiveStockRequest from '~/app/global/hooks/requests/useLiveStockRequest';
+import {useLiveStockRequest} from '~/app/global/hooks/requests/useLiveStockRequest';
 
 const LiveStockDetails = () => {
     const router = useRouter();
