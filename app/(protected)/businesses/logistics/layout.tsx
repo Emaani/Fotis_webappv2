@@ -41,7 +41,7 @@ const MainLayout = ({
                             </div>
                             <div className="flex flex-col justify-center h-full">
                                 <div className="flex gap-[3px]">
-                                    <p className=" text-sm">Marvin Kiseka</p>
+                                    <p className=" text-sm">Fotis AgroTrucks</p>
                                     <p className="flex flex-col justify-center"><FontAwesomeIcon width={10} icon={faAngleDown} /></p>
                                 </div>
                             </div>

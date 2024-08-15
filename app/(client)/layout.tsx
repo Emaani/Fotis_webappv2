@@ -44,6 +44,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                                             <li>
                                                 <Link href="/land" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Land</Link>
                                             </li>
+                                            <li>
+                                                <Link href="/land" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Insuarance</Link>
+                                            </li>
                                         </ul>
                                     </div>
                                 )}

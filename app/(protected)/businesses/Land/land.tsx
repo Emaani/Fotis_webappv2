@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import AppSpinner from "@/global/components/AppSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp, faBarChart, faBriefcase, faBusinessTime, faChartBar, faCreditCard, faDollarSign, faFire, faGun, faInfo, faInfoCircle, faLandmark, faList, faLock, faPieChart, faPlug, faPlus, faRefresh, faShop, faTable, faUsers, faVcard, faWallet } from "@fortawesome/free-solid-svg-icons";
-import LogoSection from "../../LogoSection";
+import LogoSection from "../(protected)/LogoSection";
 
 const Layout = ({
     children,
@@ -37,11 +37,11 @@ const MainLayout = ({
                     <div className={"w-screen sm:min-w-laptop sm:max-w-laptop md:min-w-laptop md:max-w-laptop lg:min-w-laptop lg:max-w-full xl:min-w-full xl:max-w-full  overflow-auto min-h-screen bg-gray-50 " + (isMinimized ? "ml-[5rem]" : "ml-[17rem]")}>
                         <div className="h-[90px] border-b flex  px-edge-space bg-white">
                             <div className=" flex-grow flex flex-col justify-center h-full">
-                                <p className="">Warehouse Provider</p>
+                                <p className="">Land Provider</p>
                             </div>
                             <div className="flex flex-col justify-center h-full">
                                 <div className="flex gap-[3px]">
-                                    <p className=" text-sm">J Mwine</p>
+                                    <p className=" text-sm">Fotis AgroLand</p>
                                     <p className="flex flex-col justify-center"><FontAwesomeIcon width={10} icon={faAngleDown} /></p>
                                 </div>
                             </div>
@@ -55,8 +55,6 @@ const MainLayout = ({
         </div>
     )
 }
-
-
 
 const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
     const pathname = usePathname();
@@ -95,15 +93,13 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
                 </Link>
             </li>
 
-
-
             <li>
                 <Link className={navLink} href="" >
                     <span className="flex">
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faVcard} />
                         </span>
-                        <span className={navTitle}>My Warehouses</span>
+                        <span className={navTitle}>My Land</span>
                     </span>
                 </Link>
             </li>
@@ -114,7 +110,7 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faShop} />
                         </span>
-                        <span className={navTitle}>Customers</span>
+                        <span className={navTitle}>Sell Land</span>
                     </span>
                 </Link>
             </li>
@@ -125,21 +121,11 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
                         <span className="nav-icon">
                             <FontAwesomeIcon icon={faList} />
                         </span>
-                        <span className={navTitle}>Customer&apos;s Inventory</span>
+                        <span className={navTitle}>Transactions</span>
                     </span>
                 </Link>
             </li>
 
-            <li>
-                <Link className={navLink} href="" >
-                    <span className="flex">
-                        <span className="nav-icon">
-                            <FontAwesomeIcon icon={faWallet} />
-                        </span>
-                        <span className={navTitle}>Warehouse Requests</span>
-                    </span>
-                </Link>
-            </li>
             <li>
                 <Link className={navLink} href="" >
                     <span className="flex">
@@ -151,7 +137,6 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
                 </Link>
             </li>
 
-    
             <li>
                 <Link className={navLink + " " + (isActiveLink(["/users"]))} href="users" >
                     <span className="flex">
@@ -165,5 +150,3 @@ const SideItems = ({ isMinimized }: { isMinimized: boolean }) => {
         </ul>
     );
 }
-
-
