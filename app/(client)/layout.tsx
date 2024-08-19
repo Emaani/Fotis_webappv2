@@ -1,20 +1,32 @@
 "use client";
 
 import Logo from "@/assets/img/logo.png";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "../global/state/hooks";
 import { deleteAuthTokens, getUserProfile, selectAuthentication } from "../global/state/features/auth/authSlice";
+
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const authenticated = useAppSelector(selectAuthentication);
     const dispatch = useAppDispatch();
 
     const [isServicesDropdownVisible, setIsServicesDropdownVisible] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseEnter = () => {
+        setIsServicesDropdownVisible(true);
+    };
+
+    const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.relatedTarget as Node)) {
+            setIsServicesDropdownVisible(false);
+        }
+    };
 
     return (
-        <div className="">
+        <div>
             <nav className="bg-prim-color border-b pt-4 pb-4 w-full z-50">
                 <div className="horizontal-padding h-full">
                     <div className="flex flex-row items-center">
@@ -26,34 +38,35 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
                             <div
                                 className="relative"
-                                onMouseEnter={() => setIsServicesDropdownVisible(true)}
-                                onMouseLeave={() => setIsServicesDropdownVisible(false)}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                ref={dropdownRef}
                             >
-                                <Link href="/" className="top-nav-link">
+                                <Link href="#" className="top-nav-link">
                                     Services
                                 </Link>
                                 {isServicesDropdownVisible && (
                                     <div className="absolute left-0 mt-2 bg-white shadow-lg rounded-md z-10">
                                         <ul className="py-2">
                                             <li>
-                                                <Link href="/warehousing" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Warehousing</Link>
+                                                <Link href="/businesses/warehousing" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Warehousing</Link>
                                             </li>
                                             <li>
-                                                <Link href="/logistics" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Logistics</Link>
+                                                <Link href="/businesses/logistics" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Logistics</Link>
                                             </li>
                                             <li>
-                                                <Link href="/land" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Land</Link>
+                                                <Link href="/businesses/land" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Land</Link>
                                             </li>
                                             <li>
-                                                <Link href="/land" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Insuarance</Link>
+                                                <Link href="/businesses/insurance" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Insurance</Link>
                                             </li>
                                         </ul>
                                     </div>
                                 )}
                             </div>
 
-                            <Link href="/home" className="top-nav-link">Dashboard</Link>
-                            <Link href="/contact" className="top-nav-link">Contracts</Link>
+                            <Link href="/dashboard" className="top-nav-link">Dashboard</Link>
+                            <Link href="/contract" className="top-nav-link">Contracts</Link>
                         </div>
                         <div className="flex flex-col justify-end h-auto">
                             {!authenticated ? (
@@ -74,7 +87,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div className="min-h-screen">
                 {children}
             </div>
-            <Footer />
+            <Footer /> {/* Ensure Footer is correctly imported and used */}
         </div>
     );
 };
