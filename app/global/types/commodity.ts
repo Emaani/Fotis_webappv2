@@ -1,5 +1,7 @@
 
 export interface Commodity{
+    latestPrice: number
+    
     id:number,
     name: string
     image: string,
